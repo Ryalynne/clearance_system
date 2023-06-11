@@ -11,5 +11,14 @@ class student_clearance extends Model
     protected $fillable = [
         'student_id','semester','status','department','remarks'
     ];
+
+    public function student(){
+        return $this->belongsTo(student_info::class, 'student_id');
+    }
+
+    public function enrollment()
+    {
+        return $this->belongsTo(student_enrollment::class, 'id');
+    }
     
 }

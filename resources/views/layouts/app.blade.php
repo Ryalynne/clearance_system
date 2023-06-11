@@ -9,14 +9,13 @@
     <title>
         {{ config('app.name', 'STI CLEARANCE') }}
     </title>
-    {{-- <script src="{{ asset('build/assets/app-1e58d95a.js') }}"></script> --}}
-    <!-- Fonts -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+   
+ 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('build/assets/app-0b55cb62.css') }}">
+    <script src="{{ asset('build/assets/app-6870bb4e.js') }}"></script>
+   
 </head>
 
 <body class="font-sans antialiased">
@@ -50,7 +49,7 @@
 
 
 </html>
-
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
     $(document).ready(function() {
         $(".myInput").on("keyup", function() {
