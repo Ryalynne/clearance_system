@@ -19,8 +19,15 @@ class UsersImport implements ToModel
      */
     public function model(array $row)
     {
-
         try {
+            // Check if the student_number already exists
+            $existingStudent = student_info::where('student_number', $row[0])->first();
+
+            if ($existingStudent) {
+                // Skip the row if the student_number already exists
+                return null;
+            }
+
             $studentInfo = new student_info([
                 "student_number" => $row[0],
                 "first_name" => $row[1],

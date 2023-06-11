@@ -44,7 +44,7 @@
                     <p>total of student</p>
                     <hr>
                     <br>
-                    <p class="text-4xl font-black text-gray-900 text-sky-400">SENIOR HIGHSCHOOL</p>
+                    <p class="text-4xl font-black text-gray-900 text-sky-400">FOR SENIOR HIGHSCHOOL</p>
                     <hr>
                     <br>
                     <p class="text-4xl font-black text-gray-900 dark:text-black">Accountancy, Business, and Management (ABM)</p>

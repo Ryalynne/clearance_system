@@ -50,3 +50,26 @@
 
 
 </html>
+
+<script>
+    $(document).ready(function() {
+        $(".myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".myTable .tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{{-- <style>
+    .myInput:focus {
+        border-color: 0 0 0 0.2rem rgba(5, 158, 0, 0.25);
+        box-shadow: 0 0 0 0.2rem rgba(5, 158, 0, 0.25);
+    }
+
+    .dropdown-item.dropdown-active-success:hover,
+    .dropdown-item.dropdown-active-success:focus,
+    .dropdown-item.dropdown-active-success.active {
+        color: rgb(255, 255, 255);
+    }
+</style> --}}

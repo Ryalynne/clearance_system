@@ -7,6 +7,7 @@ use App\Http\Controllers\viewsectionController;
 use App\Imports\UsersImport;
 use Illuminate\Support\Facades\Route;
 
+
 Route::get('/sti.baliuag/admin/it-comlab', [adminController::class, 'index']);
 Route::get('/import-student', [UsersImport::class, 'model'])->name('import.users');
 Route::post('/upload-student', [UsersImport::class, 'uploadUsers'])->name('upload.users');
@@ -27,6 +28,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('student-clearance',[viewsectionController::class,'student_clearance']);
     Route::get('student-clearance-update',[viewsectionController::class,'student_clearanceupdate']);
     Route::get('/Remark-History',[remarkHistoryController::class, 'index'])->name('Remark-History');
+   
 });
 
 require __DIR__.'/auth.php';

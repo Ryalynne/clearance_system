@@ -291,7 +291,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 <script>
     const modalOpenButton = document.getElementById('modal-open');
     const modalCloseButton = document.getElementById('modal-close');
@@ -304,4 +304,22 @@
     modalCloseButton.addEventListener('click', () => {
         modal.classList.add('hidden');
     });
+
+
+    function encryptURL(url, key) {
+        var encrypted = CryptoJS.AES.encrypt(url, key).toString();
+        return encrypted;
+    }
+
+    var url = "http://127.0.0.1:8000/sti.baliuag/admin/it-comlab";
+    var encryptionKey = "secretKey";
+
+    // Encrypt the URL
+    var encryptedURL = encryptURL(url, encryptionKey);
+
+    // Modify the URL without reloading the page
+    var modifiedURL = window.location.origin + "/#" + encryptedURL;
+    window.history.replaceState(null, null, modifiedURL);
+
+    console.log("Modified URL: " + modifiedURL);
 </script>

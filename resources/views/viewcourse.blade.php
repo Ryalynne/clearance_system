@@ -69,6 +69,40 @@
                         <p>total of student</p>
                         <hr>
                         <br>
+                        @elseif(request()->segment(1) == 'bstm')
+                        <p class="text-4xl font-black text-gray-900 text-sky-400">BSTM- YEAR LEVEL</p>
+                        <hr>
+                        <br>
+                        <p class="text-4xl font-black text-gray-900 dark:text-black">
+                            <a href="viewsection?sem=first&Request=bstm-1a&year={{ date('Y') }}"
+                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
+                                BSTM-1A</a>
+                        </p>
+                        <p>total of student</p>
+                        <hr>
+                        <br>
+                        <p class="text-4xl font-black text-gray-900 dark:text-black">
+                            <a href="viewsection?sem=first&Request=bstm-2a&year={{ date('Y') }}"
+                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
+                                BSTM-2A</a>
+                        </p>
+                        <p>total of student</p>
+                        <hr>
+                        <br>
+                        <p class="text-4xl font-black text-gray-900 dark:text-black">
+                            <a href="viewsection?sem=first&Request=bstm-3a&year={{ date('Y') }}"
+                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">BSTM-3A</a>
+                        </p>
+                        <p>total of student</p>
+                        <hr>
+                        <br>
+                        <p class="text-4xl font-black text-gray-900 dark:text-black"> <a
+                                href="viewsection?sem=first&Request=bstm-4a&year={{ date('Y') }}"
+                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
+                                BSTM-4A</a></p>
+                        <p>total of student</p>
+                        <hr>
+                        <br>
                     @endif
 
                 </div>
