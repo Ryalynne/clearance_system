@@ -17,11 +17,17 @@ class dashboardController extends Controller
         $bsais = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%bsais%')->count();
         $bsba = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%bsba%')->count();
         $act = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%act%')->count();
-
-        $student = student_info::paginate(10);
+        $abm = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%abm%')->count();
+        $stem = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%stem%')->count();
+        $humss = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%humss%')->count();
+        $it = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%it%')->count();
+        $to = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%to%')->count();
+        $ca = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%ca%')->count();
+        $ga = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%ga%')->count();
+        $student = student_enrollment::paginate(10);
         $department = User::get();
 
-        return view('dashboard', compact('bsit', 'bshm', 'bstm', 'bsais', 'bsba', 'act','student', 'department'));
+        return view('dashboard', compact('bsit', 'bshm', 'bstm', 'bsais', 'bsba', 'act','student', 'department','abm','stem','humss','it','to','ca','ga'));
 
     }
 

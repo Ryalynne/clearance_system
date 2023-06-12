@@ -10,10 +10,12 @@
                 <div class="flex justify-between items-center">
                     <form method="get" class="flex space-x-4">
                         <select name="sem" data-te-select-init>
-                            <option value="first"{{ request()->input('sem') === 'first' && request()->input('Request') ? ' selected' : '' }}>
+                            <option
+                                value="first"{{ request()->input('sem') === 'first' && request()->input('Request') ? ' selected' : '' }}>
                                 First Semester
                             </option>
-                            <option value="second"{{ request('sem') === 'second' && request()->input('Request') ? ' selected' : '' }}>
+                            <option
+                                value="second"{{ request('sem') === 'second' && request()->input('Request') ? ' selected' : '' }}>
                                 Second Semester
                             </option>
                         </select>
@@ -23,10 +25,10 @@
                             {{ __('FILTER') }}
                         </x-primary-button>
                     </form>
-                    
+
                     <div class="input-group ml-4">
-                        <input type="search" class="form-control rounded myInput" placeholder="Search" aria-label="Search"
-                            aria-describedby="search-addon" />
+                        <input type="search" class="form-control rounded myInput" placeholder="Search"
+                            aria-label="Search" aria-describedby="search-addon" />
                     </div>
                 </div>
             </div>
@@ -37,22 +39,24 @@
                         <div class="overflow-x-auto">
                             <table class="min-w-full text-left text-sm font-light myTable" id="student-table">
                                 <thead>
-                                    <tr class="whitespace-nowrap px-6 py-4 font-medium">
-                                        <th scope="col" class="px-6 py-4">Student Number</th>
-                                        <th scope="col" class="px-6 py-4">First Name</th>
-                                        <th scope="col" class="px-6 py-4">Middle Name</th>
-                                        <th scope="col" class="px-6 py-4">Last Name</th>
-                                        <th scope="col" class="px-6 py-4">Semester</th>
-                                        <th scope="col" class="px-6 py-4">Library</th>
-                                        <th scope="col" class="px-6 py-4">Guidance Counselor</th>
-                                        <th scope="col" class="px-6 py-4">Alumni and Placement</th>
-                                        <th scope="col" class="px-6 py-4">Prefect of Discipline and Student Affairs
-                                        </th>
-                                        <th scope="col" class="px-6 py-4">Accounting Office</th>
-                                        <th scope="col" class="px-6 py-4">Registrar's Office</th>
-                                        <th scope="col" class="px-6 py-4">Dean</th>
-                                        <th scope="col" class="px-6 py-4">Remarks</th>
-                                    </tr>
+                                    @if ($student->count() > 0)
+                                        <tr class="whitespace-nowrap px-6 py-4 font-medium">
+                                            <th scope="col" class="px-6 py-4">Student Number</th>
+                                            <th scope="col" class="px-6 py-4">First Name</th>
+                                            <th scope="col" class="px-6 py-4">Middle Name</th>
+                                            <th scope="col" class="px-6 py-4">Last Name</th>
+                                            <th scope="col" class="px-6 py-4">Semester</th>
+                                            <th scope="col" class="px-6 py-4">Library</th>
+                                            <th scope="col" class="px-6 py-4">Guidance Counselor</th>
+                                            <th scope="col" class="px-6 py-4">Alumni and Placement</th>
+                                            <th scope="col" class="px-6 py-4">Prefect of Discipline and Student
+                                                Affairs
+                                            </th>
+                                            <th scope="col" class="px-6 py-4">Accounting Office</th>
+                                            <th scope="col" class="px-6 py-4">Registrar's Office</th>
+                                            <th scope="col" class="px-6 py-4">Dean</th>
+                                            <th scope="col" class="px-6 py-4">Remarks</th>
+                                        </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($student as $list)
@@ -421,6 +425,11 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                @else
+                                    <tr>
+                                        <td class="text-center" colspan="8"><strong>No student found</strong></td>
+                                    </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -465,50 +474,6 @@
                 });
         }
     });
-
-
-    // $('.input-text').keydown(function(event) {
-    //     $(this).attr('style', 'color: red');
-    //     if (event.keyCode === 13) {
-    //         event.preventDefault();
-    //         var id = $(this).data('student');
-    //         var department = $(this).data('department');
-    //         var remark = $(this).val();
-    //         var rowIndex = $(this).closest('tr').index();
-    //         var targetButton = $('table tbody tr:eq(' + rowIndex + ')').find('.getid');
-    //         targetButton.prop('disabled', false);
-    //         targetButton.prop('checked', false);
-    //         console.log(rowIndex);
-    //         $(this).attr('style', 'color: black');
-
-
-    //         url = "/student-clearance?student=" + id + '&department=' + department + '&remarks=' + remark +
-    //             '&semester=' + $(this).data('semester')
-    //         $.get(url, function(data) {
-    //             console.log(data);
-    //         });
-    //     }
-    // });
-
-
-    // $('.getid').on('click', function() {
-    //     var id = $(this).data('id');
-    //     let check = $('#checkbox-' + id).is(':checked');
-    //     if (check) {
-    //         var rowIndex = $(this).closest('tr').index();
-    //         var targetButton = $('table tbody tr:eq(' + rowIndex + ')').find('.getid');
-    //         targetButton.prop('disabled', true);
-    //         targetButton.prop('checked', true);
-    //         var targetInput = $('table tbody tr:eq(' + rowIndex + ')').find('.input-text');
-    //         targetInput.val('');
-    //         console.log(rowIndex);
-
-    //         url = "/student-clearance-update?id=" + id
-    //         $.get(url, function(data) {
-    //             console.log("working");
-    //         });
-    //     }
-    // });
 
     $('.getid').on('click', function() {
         var id = $(this).data('id');

@@ -187,19 +187,19 @@
                                             <tbody>
                                                 <tr class="border-b dark:border-neutral-500">
                                                     <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                        {{ $list->student_number }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->first_name }}
+                                                        {{ $list->student->student_number }}</td>
+                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->student->first_name }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->middle_name }}
+                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->student->middle_name }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->last_name }}</td>
+                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->student->last_name }}</td>
                                                     <td class="whitespace-nowrap px-6 py-4">
-                                                        {{ $list->enrollment->semester }}
+                                                        {{ $list->semester }}
                                                     </td>
                                                     <td class="whitespace-nowrap px-6 py-4">
-                                                        {{ $list->enrollment->school_year }}</td>
+                                                        {{ $list->school_year }}</td>
                                                     <td class="whitespace-nowrap px-6 py-4">
-                                                        {{ $list->enrollment->class }}
+                                                        {{ $list->class }}
                                                     </td>
                                                     <td class="whitespace-nowrap px-6 py-4">{{ $list->created_at }}
                                                     </td>
@@ -471,7 +471,8 @@
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Accountancy,
                                 Business, and Management (ABM) </a>
                         </p>
-                        <p>total of student this year :</p>
+                        <p>total of student this year : <span
+                            style="color: rgb(255, 61, 39);">{{ $abm }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -479,7 +480,8 @@
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Science,
                                 Technology, Engineering, and Mathematics (STEM)</a>
                         </p>
-                        <p>total of student this year :</p>
+                        <p>total of student this year : <span
+                            style="color: rgb(255, 61, 39);">{{ $stem }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -487,7 +489,8 @@
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Humanities
                                 and Social Sciences (HUMSS)</a>
                         </p>
-                        <p>total of student this year </p>
+                        <p>total of student this year : <span
+                            style="color: rgb(255, 61, 39);">{{ $humss }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -495,7 +498,8 @@
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">General
                                 Academic (GA)</a>
                         </p>
-                        <p>total of student this year </p>
+                        <p>total of student this year : <span
+                            style="color: rgb(255, 61, 39);">{{ $ga }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -503,7 +507,8 @@
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">IT in
                                 Mobile App and Web Development (IT)</a>
                         </p>
-                        <p>total of student this year </p>
+                        <p>total of student this year : <span
+                            style="color: rgb(255, 61, 39);">{{ $it }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -511,7 +516,8 @@
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Tourism
                                 Operations (TO)</a>
                         </p>
-                        <p>total of student this year </p>
+                        <p>total of student this year : <span
+                            style="color: rgb(255, 61, 39);">{{ $to }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -519,7 +525,8 @@
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Culinary
                                 Arts (CA)</a>
                         </p>
-                        <p>total of student this year </p>
+                        <p>total of student this year : <span
+                            style="color: rgb(255, 61, 39);">{{ $ca }}</span></p>
                         <hr>
                     </div>
                 </div>
