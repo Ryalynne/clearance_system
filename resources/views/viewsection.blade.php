@@ -445,7 +445,7 @@
         var inputText = $(this);
         inputText.css('color', 'red');
 
-        if (event.keyCode === 13) {
+        if (event.keyCode === 13 && inputText.val() != "") {
             event.preventDefault();
 
             var id = inputText.data('student');

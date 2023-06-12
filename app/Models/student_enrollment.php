@@ -97,4 +97,6 @@ class student_enrollment extends Model
             ->where('status', 0)
             ->value('remarks');
     }
+
+    
 }

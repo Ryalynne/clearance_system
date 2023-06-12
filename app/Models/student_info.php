@@ -17,4 +17,9 @@ class student_info extends Model
     {
         return $this->belongsTo(student_enrollment::class, 'id');
     }
+
+    public function student(){
+        return $this->belongsTo(student_info::class, 'student_id');
+    }
+    
 }
