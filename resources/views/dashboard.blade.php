@@ -24,10 +24,22 @@
                                             <div class="flex items-center">
                                                 <input type="file" name="file"
                                                     class="border border-gray-300 px-4 py-2 rounded">
-                                                <button type="submit"
-                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
-                                                    Upload
-                                                </button>
+                                                    <x-primary-button class="ml-3" type="submit">
+                                                        {{ __('UPLOAD') }}
+                                                    </x-primary-button>
+                                            </div>
+                                        </form>
+                                        <div class="input-group ml-4">
+                                            <input type="search" class="form-control rounded myInput" placeholder="Search"
+                                                aria-label="Search" aria-describedby="search-addon" />
+                                        </div>
+                                        <form method="get" class="flex space-x-4">
+                                            <div class="input-group ml-4">
+                                                <input type="search" name="student_number" value="{{ request('student_number') }}" class="form-control rounded" placeholder="Request Student No."
+                                                    aria-label="Search" aria-describedby="search-addon" />
+                                                <x-primary-button class="ml-3" type="submit">
+                                                    {{ __('FIND') }}
+                                                </x-primary-button>
                                             </div>
                                         </form>
                                     </div>
@@ -93,43 +105,43 @@
                                                     <label for="class" class="block mb-2">Class:</label>
                                                     <select name="class">
                                                         <option value="bsit">
-                                                            BSIT
+                                                            BS Information Technology (BSIT)
                                                         </option>
                                                         <option value="bshm">
-                                                            BSHM
+                                                            BS Hospitality Management (BSHM)
                                                         </option>
                                                         <option value="bstm">
-                                                            BSTM
+                                                            BS Tourism Management (BSTM)
                                                         </option>
                                                         <option value="bsais">
-                                                            BSAIS
+                                                            BS Accounting Information System (BSAIS)
                                                         </option>
                                                         <option value="bsba">
-                                                            BSBA
+                                                            BS Business Administration (BSBA)
                                                         </option>
                                                         <option value="act">
-                                                            ACT
+                                                            2 yr. Associate in Computer Technology (ACT)
                                                         </option>
                                                         <option value="abm">
-                                                            ABM
+                                                            Accountancy, Business, and Management (ABM)
                                                         </option>
                                                         <option value="stem">
-                                                            STEM
+                                                            Science, Technology, Engineering, and Mathematics (STEM)
                                                         </option>
                                                         <option value="humss">
-                                                            HUMSS
+                                                            Humanities and Social Sciences (HUMSS)
                                                         </option>
                                                         <option value="ga">
-                                                            GA
+                                                            General Academic (GA)
                                                         </option>
                                                         <option value="it">
-                                                            IT
+                                                            IT in Mobile App and Web Development (IT)
                                                         </option>
                                                         <option value="to">
-                                                            TO
+                                                            Tourism Operations(TO)
                                                         </option>
                                                         <option value="ca">
-                                                            CA
+                                                            Culinary Arts(CA)
                                                         </option>
                                                     </select>
                                                 </div>
@@ -137,17 +149,29 @@
                                                 <div class="mb-4">
                                                     <label for="section" class="block mb-2">Section:</label>
                                                     <select name="section">
-                                                        <option value="1-a">
+                                                        <option value="1a">
                                                             1-A
                                                         </option>
-                                                        <option value="2-a">
+                                                        <option value="1b">
+                                                            1-B
+                                                        </option>
+                                                        <option value="2a">
                                                             2-A
                                                         </option>
-                                                        <option value="3-a">
+                                                        <option value="2b">
+                                                            2-B
+                                                        </option>
+                                                        <option value="3a">
                                                             3-A
                                                         </option>
-                                                        <option value="4-a">
+                                                        <option value="3b">
+                                                            3-B
+                                                        </option>
+                                                        <option value="4a">
                                                             4-A
+                                                        </option>
+                                                        <option value="4b">
+                                                            4-B
                                                         </option>
                                                     </select>
                                                 </div>
@@ -164,14 +188,19 @@
                                                         Register
                                                     </button>
                                                 </div>
+                                                
                                             </form>
+                                         
                                         </div>
+                                   
                                     </div>
 
                                     <hr>
-                                    <table class="min-w-full text-left text-sm font-light">
+                               
+                                    <table class="min-w-full text-left text-sm font-light myTable">
                                         <thead class="border-b font-medium dark:border-neutral-500">
                                             <tr>
+                                                <th scope="col" class="px-6 py-4">ID</th>
                                                 <th scope="col" class="px-6 py-4">Student Number</th>
                                                 <th scope="col" class="px-6 py-4">First Name</th>
                                                 <th scope="col" class="px-6 py-4">Middle Name</th>
@@ -185,7 +214,9 @@
                                         </thead>
                                         @foreach ($student as $list)
                                             <tbody>
-                                                <tr class="border-b dark:border-neutral-500">
+                                                <tr class="border-b dark:border-neutral-500 tr">
+                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
+                                                        {{ $list->id }}</td>
                                                     <td class="whitespace-nowrap px-6 py-4 font-medium">
                                                         {{ $list->student->student_number }}</td>
                                                     <td class="whitespace-nowrap px-6 py-4">
@@ -204,10 +235,11 @@
                                                     <td class="whitespace-nowrap px-6 py-4">
                                                         {{ $list->class }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->created_at }}
+                                                    <td class="whitespace-nowrap px-6 py-4">{{ \Carbon\Carbon::parse($list->cretead_at)->format('Y-m-d') }}
                                                     </td>
                                                     <td class="whitespace-nowrap px-6 py-4">
-                                                        <button>
+                                                        <button id="modal-open2" class="edit-button"
+                                                            data-id={{ $list->id }}>
                                                             <svg fill="none" class="w-7 h-7" stroke="currentColor"
                                                                 stroke-width="1.5" viewBox="0 0 25 25"
                                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -324,15 +356,8 @@
                                                     <td class="whitespace-nowrap px-6 py-4">{{ $list->created_at }}
                                                     </td>
                                                     <td class="whitespace-nowrap px-6 py-4">
-                                                        <button>
-                                                            <svg fill="none" class="w-7 h-7" stroke="currentColor"
-                                                                stroke-width="1.5" viewBox="0 0 25 25"
-                                                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
-                                                                </path>
-                                                            </svg>
-                                                        </button>
+
+
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -345,6 +370,169 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="modal2" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <div
+                class="bg-white rounded-lg p-6 w-full sm:w-2/3 lg:w-1/2 xl:w-1/3 border-4 border-blue-500 max-h-screen overflow-y-auto">
+                <!-- Modal Content -->
+                <h2 class="text-xl font-bold mb-4 text-sky-500">
+                    Update Student</h2>
+                <!-- Student Form -->
+                <form method="POST" action="/updatestudent">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="student_id" class="block mb-2">ID:</label>
+                        <input type="number" name="student_id"
+                            class="p-2 border border-gray-300 rounded-lg w-full modal-student-id" readonly>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <label for="student_number" class="block mb-2">Student
+                            Number:</label>
+                        <input type="number"
+                            class="p-2 border border-gray-300 rounded-lg w-full modal-student-number" required
+                            name="student_number">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="first-name" class="block mb-2">First Name:</label>
+                        <input type="text" id="first-name" name="first_name"
+                            class="p-2 border border-gray-300 rounded-lg w-full modal-student-first_name" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="middle-name" class="block mb-2">Middle Name:</label>
+                        <input type="text" id="middle-name" name="middle_name"
+                            class="p-2 border border-gray-300 rounded-lg w-full modal-student-middle_name" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="last-name" class="block mb-2">Last
+                            Name:</label>
+                        <input type="text" id="last-name" name="last_name"
+                            class="p-2 border border-gray-300 rounded-lg w-full modal-student-last_name" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="sem" class="block mb-2 ">Semester:</label>
+                        <select name="semester" class="modal-student-semester">
+                            <option value="first">
+                                First
+                            </option>
+                            <option value="second">
+                                Second
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="year" class="block mb-2">School Year:</label>
+                        <input type="number" id="year" name="school_year" pattern="[0-9]{4}"
+                            class="p-2 border border-gray-300 rounded-lg w-full modal-student-school_year" required
+                            value="{{ date('Y') }}">
+                        <p class="text-sm text-gray-500 mt-1">Please
+                            enter the year in the
+                            format
+                            YYYY (e.g., 2023).</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="class" class="block mb-2">Class:</label>
+                        <select name="class" class="modal-student-class">
+                            <option value="bsit">
+                                BS Information Technology (BSIT)
+                            </option>
+                            <option value="bshm">
+                                BS Hospitality Management (BSHM)
+                            </option>
+                            <option value="bstm">
+                                BS Tourism Management (BSTM)
+                            </option>
+                            <option value="bsais">
+                                BS Accounting Information System (BSAIS)
+                            </option>
+                            <option value="bsba">
+                                BS Business Administration (BSBA)
+                            </option>
+                            <option value="act">
+                                2 yr. Associate in Computer Technology
+                                (ACT)
+                            </option>
+                            <option value="abm">
+                                Accountancy, Business, and Management
+                                (ABM)
+                            </option>
+                            <option value="stem">
+                                Science, Technology, Engineering, and
+                                Mathematics (STEM)
+                            </option>
+                            <option value="humss">
+                                Humanities and Social Sciences (HUMSS)
+                            </option>
+                            <option value="ga">
+                                General Academic (GA)
+                            </option>
+                            <option value="it">
+                                IT in Mobile App and Web Development
+                                (IT)
+                            </option>
+                            <option value="to">
+                                Tourism Operations(TO)
+                            </option>
+                            <option value="ca">
+                                Culinary Arts(CA)
+                            </option>
+                            <option value="no class">
+                                Remove Class
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="section" class="block mb-2">Section:</label>
+                        <select name="section" class="modal-student-section">
+                            <option value="1a">
+                                1-A
+                            </option>
+                            <option value="1b">
+                                1-B
+                            </option>
+                            <option value="2a">
+                                2-A
+                            </option>
+                            <option value="2b">
+                                2-B
+                            </option>
+                            <option value="3a">
+                                3-A
+                            </option>
+                            <option value="3b">
+                                3-B
+                            </option>
+                            <option value="4a">
+                                4-A
+                            </option>
+                            <option value="4b">
+                                4-B
+                            </option>
+                        </select>
+                    </div>
+                    <div class="flex justify-between">
+                        <button id="modal-close2" type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Close Modal
+                        </button>
+
+                        {{-- @csrf --}}
+                        <button type="submit"
+                            class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
+                            Update
+                        </button>
+                </form>
+            </div>
+
+        </div>
         </div>
         <script>
             const passwordInput = document.getElementById('password');
@@ -393,6 +581,61 @@
 
             modalCloseButton1.addEventListener('click', () => {
                 modal1.classList.add('hidden');
+            });
+
+            // const modalOpenButton2 = document.getElementById('modal-open2');
+            // const modalCloseButton2 = document.getElementById('modal-close2');
+            // const modal2 = document.getElementById('modal2');
+
+            // modalOpenButton2.addEventListener('click', () => {
+            //     modal2.classList.remove('hidden');
+            // });
+
+            // modalCloseButton2.addEventListener('click', () => {
+            //     modal2.classList.add('hidden');
+            // });
+
+
+            // var editButtons = document.querySelectorAll('.edit-button');
+            // editButtons.forEach(function(button) {
+            //     button.addEventListener('click', function() {
+            //         // Get the data-id attribute value of the clicked button
+            //         var studentId = button.getAttribute('data-id');
+
+            //         // Perform your desired action for each row individually
+            //         // Example: Open a modal or perform an edit operation
+            //         console.log('Clicked button for student ID: ' + studentId);
+            //         // Add your code here to open the modal or perform the edit operation
+            //     });
+            // });
+
+            const modalCloseButton2 = document.getElementById('modal-close2');
+            const modal2 = document.getElementById('modal2');
+
+            function openModal() {
+                modal2.classList.remove('hidden');
+            }
+
+            function closeModal() {
+                modal2.classList.add('hidden');
+            }
+
+            modalCloseButton2.addEventListener('click', closeModal);
+
+            var editButtons = document.querySelectorAll('.edit-button');
+            editButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Get the data-id attribute value of the clicked button
+                    var studentId = button.getAttribute('data-id');
+
+                    // Perform your desired action for each row individually
+                    // Example: Open a modal or perform an edit operation
+                    console.log('Clicked button for student ID: ' + studentId);
+                    // Add your code here to open the modal or perform the edit operation
+
+                    // Open the modal for the respective row
+                    openModal();
+                });
             });
         </script>
     </x-app-layout>

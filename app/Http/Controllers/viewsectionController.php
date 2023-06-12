@@ -16,7 +16,7 @@ class viewsectionController extends Controller
         $class = $request->input('Request');
         $year = $request->input('year');
         $student = null;
-        $student = student_enrollment::where('class', $class)->where('semester', $sem)->where('school_year', $year)->paginate(15);
+        $student = student_enrollment::where('class', $class)->where('semester', $sem)->where('school_year', $year)->paginate(10);
         if ($student === null) {
             return false;
         }

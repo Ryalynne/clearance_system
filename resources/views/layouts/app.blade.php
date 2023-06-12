@@ -9,13 +9,12 @@
     <title>
         {{ config('app.name', 'STI CLEARANCE') }}
     </title>
-   
- 
+    <link rel="icon" href="{{ asset('image/stilogo.png') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('build/assets/app-0b55cb62.css') }}">
     <script src="{{ asset('build/assets/app-6870bb4e.js') }}"></script>
-   
+
 </head>
 
 <body class="font-sans antialiased">
@@ -57,6 +56,36 @@
             $(".myTable .tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
+        });
+    });
+
+    $(document).ready(function() {
+        $(".myInput1").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".myTable1 .tr1").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    $('.edit-button').on('click', function() {
+        var id = $(this).data('id');
+        $.get("/student/" + id, function(data, status) {
+            var classSection = data.student.class.split('-');
+            var className = classSection[0]; // Get the class name
+            var sectionName = classSection[1]; // "1a"
+
+            $('.modal-student-semester').val(data.student.semester);
+            $('.modal-student-school_year').val(data.student.school_year);
+            $('.modal-student-id').val(data.student.id);
+            $('.modal-student-class').val(className);
+            $('.modal-student-section').val(sectionName);
+        });
+        $.get("/enrollment/" + id, function(data, status) {
+            $('.modal-student-number').val(data.enrollment.student_number);
+            $('.modal-student-first_name').val(data.enrollment.first_name);
+            $('.modal-student-middle_name').val(data.enrollment.middle_name);
+            $('.modal-student-last_name').val(data.enrollment.last_name);
         });
     });
 </script>

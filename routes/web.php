@@ -37,6 +37,12 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/upload-student', [UsersImport::class, 'uploadUsers'])->name('upload.users');
     Route::post('/registerStudent', [dashboardController::class, 'registerStudent'])->name('register.student');
     Route::post('/registerUser', [dashboardController::class, 'registerUser']);
+
+    Route::get('/student/{id}',[dashboardController::class, 'get_student']);
+    Route::get('/enrollment/{id}',[dashboardController::class, 'get_enrollment']);
+
+    Route::post('/updatestudent', [dashboardController::class, 'updateStudent']);
+
 });
 
 require __DIR__.'/auth.php';

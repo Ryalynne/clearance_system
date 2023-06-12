@@ -36,6 +36,7 @@
                 <div class="inline-block min-w-full">
                     <div class="overflow-hidden">
                         <br><br>
+                        
                         <div class="overflow-x-auto">
                             <table class="min-w-full text-left text-sm font-light myTable" id="student-table">
                                 <thead>
@@ -45,12 +46,11 @@
                                             <th scope="col" class="px-6 py-4">First Name</th>
                                             <th scope="col" class="px-6 py-4">Middle Name</th>
                                             <th scope="col" class="px-6 py-4">Last Name</th>
-                                            <th scope="col" class="px-6 py-4">Semester</th>
+                                           
                                             <th scope="col" class="px-6 py-4">Library</th>
                                             <th scope="col" class="px-6 py-4">Guidance Counselor</th>
                                             <th scope="col" class="px-6 py-4">Alumni and Placement</th>
-                                            <th scope="col" class="px-6 py-4">Prefect of Discipline and Student
-                                                Affairs
+                                            <th scope="col" class="px-6 py-4">Prefect.
                                             </th>
                                             <th scope="col" class="px-6 py-4">Accounting Office</th>
                                             <th scope="col" class="px-6 py-4">Registrar's Office</th>
@@ -65,7 +65,7 @@
                                             <td class="px-6 py-4">{{ $list->student->first_name }}</td>
                                             <td class="px-6 py-4">{{ $list->student->middle_name }}</td>
                                             <td class="px-6 py-4">{{ $list->student->last_name }}</td>
-                                            <td class="px-6 py-4">{{ $list->semester }}</td>
+                                            {{-- <td class="px-6 py-4">{{ $list->semester }}</td> --}}
                                             <td class="px-6 py-4">
                                                 <div class="mb-[0.125rem] inline-block min-h-[1.5rem] pl-[1.5rem]">
                                                     @if (auth()->user()->department == 'library')
@@ -505,13 +505,13 @@
         var tableContainer = $('.overflow-x-auto');
         tableContainer.scrollLeft(tableContainer[0].scrollWidth);
     });
+    
 </script>
 <style>
     .overflow-x-auto {
         scrollbar-width: thin;
         scrollbar-color: gray;
     }
-
     .overflow-x-auto::-webkit-scrollbar {
         width: 8px;
     }
@@ -523,4 +523,5 @@
     .overflow-x-auto::-webkit-scrollbar-thumb {
         background-color: gray;
     }
+    
 </style>

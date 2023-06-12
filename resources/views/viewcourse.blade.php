@@ -218,25 +218,25 @@
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="viewsection?sem=first&Request=abm-2a&year={{ date('Y') }}"
+                            <a href="viewsection?sem=first&Request=abm-1b&year={{ date('Y') }}"
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
-                                ABM-2A</a>
+                                ABM-1B</a>
+                        </p>
+                          <p class="text-gray-600 dark:text-gray-400">This class is for first-year ABM students.</p>
+                        <hr>
+                        <br>
+                        <p class="text-4xl font-black text-gray-900 dark:text-black">
+                            <a href="viewsection?sem=first&Request=abm-2a&year={{ date('Y') }}"
+                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">ABM-2A</a>
                         </p>
                           <p class="text-gray-600 dark:text-gray-400">This class is for second-year ABM students.</p>
                         <hr>
                         <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="viewsection?sem=first&Request=abm-3a&year={{ date('Y') }}"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">ABM-3A</a>
-                        </p>
-                          <p class="text-gray-600 dark:text-gray-400">This class is for third-year ABM students.</p>
-                        <hr>
-                        <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black"> <a
-                                href="viewsection?sem=first&Request=abm-4a&year={{ date('Y') }}"
+                                href="viewsection?sem=first&Request=abm-2b&year={{ date('Y') }}"
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
-                                ABM-4A</a></p>
-                          <p class="text-gray-600 dark:text-gray-400">This class is for fourth-year ABM students.</p>
+                                ABM-2B</a></p>
+                          <p class="text-gray-600 dark:text-gray-400">This class is for second-year ABM students.</p>
                         <hr>
                         <br>
                         @elseif(request()->segment(1) == 'stem')
@@ -252,25 +252,25 @@
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="viewsection?sem=first&Request=stem-2a&year={{ date('Y') }}"
+                            <a href="viewsection?sem=first&Request=stem-1b&year={{ date('Y') }}"
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
-                                STEM-2A</a>
+                                STEM-1B</a>
                         </p>
                           <p class="text-gray-600 dark:text-gray-400">This class is for second-year STEM students.</p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="viewsection?sem=first&Request=stem-3a&year={{ date('Y') }}"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">STEM-3A</a>
+                            <a href="viewsection?sem=first&Request=stem-2a&year={{ date('Y') }}"
+                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">STEM-2A</a>
                         </p>
-                          <p class="text-gray-600 dark:text-gray-400">This class is for third-year STEM students.</p>
+                          <p class="text-gray-600 dark:text-gray-400">This class is for second-year STEM students.</p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black"> <a
-                                href="viewsection?sem=first&Request=stem-4a&year={{ date('Y') }}"
+                                href="viewsection?sem=first&Request=stem-2b&year={{ date('Y') }}"
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
-                                STEM-4A</a></p>
-                          <p class="text-gray-600 dark:text-gray-400">This class is for fourth-year STEM students.</p>
+                                STEM-2B</a></p>
+                          <p class="text-gray-600 dark:text-gray-400">This class is for second-year STEM students.</p>
                         <hr>
                         <br>
                         @elseif(request()->segment(1) == 'humss')
@@ -286,25 +286,25 @@
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="viewsection?sem=first&Request=humss-2a&year={{ date('Y') }}"
+                            <a href="viewsection?sem=first&Request=humss-1b&year={{ date('Y') }}"
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
-                                HUMSS-2A</a>
+                                HUMSS-1B</a>
+                        </p>
+                          <p class="text-gray-600 dark:text-gray-400">This class is for first-year HUMSS students.</p>
+                        <hr>
+                        <br>
+                        <p class="text-4xl font-black text-gray-900 dark:text-black">
+                            <a href="viewsection?sem=first&Request=humss-2a&year={{ date('Y') }}"
+                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">HUMSS-2A</a>
                         </p>
                           <p class="text-gray-600 dark:text-gray-400">This class is for second-year HUMSS students.</p>
                         <hr>
                         <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="viewsection?sem=first&Request=humss-3a&year={{ date('Y') }}"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">HUMSS-3A</a>
-                        </p>
-                          <p class="text-gray-600 dark:text-gray-400">This class is for third-year HUMSS students.</p>
-                        <hr>
-                        <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black"> <a
-                                href="viewsection?sem=first&Request=humss-4a&year={{ date('Y') }}"
+                                href="viewsection?sem=first&Request=humss-2b&year={{ date('Y') }}"
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
-                                HUMSS-4A</a></p>
-                          <p class="text-gray-600 dark:text-gray-400">This class is for fourth-year HUMSS students.</p>
+                                HUMSS-2B</a></p>
+                          <p class="text-gray-600 dark:text-gray-400">This class is for second-year HUMSS students.</p>
                         <hr>
                         <br>
                         @elseif(request()->segment(1) == 'ga')
@@ -320,25 +320,25 @@
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="viewsection?sem=first&Request=ga-2a&year={{ date('Y') }}"
+                            <a href="viewsection?sem=first&Request=ga-1b&year={{ date('Y') }}"
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
-                                GA-2A</a>
+                                GA-1B</a>
+                        </p>
+                          <p class="text-gray-600 dark:text-gray-400">This class is for first-year GA students.</p>
+                        <hr>
+                        <br>
+                        <p class="text-4xl font-black text-gray-900 dark:text-black">
+                            <a href="viewsection?sem=first&Request=ga-2a&year={{ date('Y') }}"
+                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">GA-2A</a>
                         </p>
                           <p class="text-gray-600 dark:text-gray-400">This class is for second-year GA students.</p>
                         <hr>
                         <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="viewsection?sem=first&Request=ga-3a&year={{ date('Y') }}"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">GA-3A</a>
-                        </p>
-                          <p class="text-gray-600 dark:text-gray-400">This class is for third-year GA students.</p>
-                        <hr>
-                        <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black"> <a
-                                href="viewsection?sem=first&Request=ga-4a&year={{ date('Y') }}"
+                                href="viewsection?sem=first&Request=ga-2b&year={{ date('Y') }}"
                                 class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">
-                                GA-4A</a></p>
-                          <p class="text-gray-600 dark:text-gray-400">This class is for fourth-year GA students.</p>
+                                GA-2B</a></p>
+                          <p class="text-gray-600 dark:text-gray-400">This class is for second-year GA students.</p>
                         <hr>
                         <br>
                         @elseif(request()->segment(1) == 'it')
