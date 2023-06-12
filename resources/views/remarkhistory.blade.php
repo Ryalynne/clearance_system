@@ -62,10 +62,8 @@
                                 @foreach ($remarks as $item)
                                     <tr class="tr">
                                         <td class="px-6 py-4 border-b border-black border-r border-black">
-                                            {{ $item->student_id }} </td>
-                                            <td class="px-6 py-4 border-b border-black border-r border-black">
-                                                {{ $item->semester}} </td>
-                                        {{-- <td class="px-6 py-4 border-b border-black border-r border-black">
+                                            {{ $item->student_number }} </td>
+                                        <td class="px-6 py-4 border-b border-black border-r border-black">
                                             {{ $item->first_name }}</td>
                                         <td class="px-6 py-4 border-b border-black border-r border-black">
                                             {{ $item->middle_name }}</td>
@@ -76,14 +74,14 @@
                                         <td class="px-6 py-4 border-b border-black border-r border-black">
                                             {{ $item->class }}</td>
                                         <td class="px-6 py-4 border-b border-black border-r border-black">
-                                            {{ $item->semester }}</td> --}}
+                                            {{ $item->semester }}</td>
                                         <td class="px-6 py-4 border-b border-black">{{ $item->remarks }}</td>
                                     </tr>
                                 @endforeach
                             @else
-                            <tr>
-                                <td class="text-center" colspan="8"><strong>No student found</strong></td>
-                            </tr>
+                                <tr>
+                                    <td class="text-center" colspan="8"><strong>No student found</strong></td>
+                                </tr>
                             @endif
                         </tbody>
                     </table>
