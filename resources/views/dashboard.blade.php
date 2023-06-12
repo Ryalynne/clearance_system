@@ -188,11 +188,14 @@
                                                 <tr class="border-b dark:border-neutral-500">
                                                     <td class="whitespace-nowrap px-6 py-4 font-medium">
                                                         {{ $list->student->student_number }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->student->first_name }}
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        {{ $list->student->first_name }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->student->middle_name }}
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        {{ $list->student->middle_name }}
                                                     </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">{{ $list->student->last_name }}</td>
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        {{ $list->student->last_name }}</td>
                                                     <td class="whitespace-nowrap px-6 py-4">
                                                         {{ $list->semester }}
                                                     </td>
@@ -393,7 +396,13 @@
             });
         </script>
     </x-app-layout>
-@else
+@elseif(auth()->user()->department == 'library' ||
+        auth()->user()->department == 'guidance' ||
+        auth()->user()->department == 'alumni' ||
+        auth()->user()->department == 'prefect' ||
+        auth()->user()->department == 'accounting' ||
+        auth()->user()->department == 'registrar' ||
+        auth()->user()->department == 'dean')
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -472,7 +481,7 @@
                                 Business, and Management (ABM) </a>
                         </p>
                         <p>total of student this year : <span
-                            style="color: rgb(255, 61, 39);">{{ $abm }}</span></p>
+                                style="color: rgb(255, 61, 39);">{{ $abm }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -481,7 +490,7 @@
                                 Technology, Engineering, and Mathematics (STEM)</a>
                         </p>
                         <p>total of student this year : <span
-                            style="color: rgb(255, 61, 39);">{{ $stem }}</span></p>
+                                style="color: rgb(255, 61, 39);">{{ $stem }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -490,7 +499,7 @@
                                 and Social Sciences (HUMSS)</a>
                         </p>
                         <p>total of student this year : <span
-                            style="color: rgb(255, 61, 39);">{{ $humss }}</span></p>
+                                style="color: rgb(255, 61, 39);">{{ $humss }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -499,7 +508,7 @@
                                 Academic (GA)</a>
                         </p>
                         <p>total of student this year : <span
-                            style="color: rgb(255, 61, 39);">{{ $ga }}</span></p>
+                                style="color: rgb(255, 61, 39);">{{ $ga }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -508,7 +517,7 @@
                                 Mobile App and Web Development (IT)</a>
                         </p>
                         <p>total of student this year : <span
-                            style="color: rgb(255, 61, 39);">{{ $it }}</span></p>
+                                style="color: rgb(255, 61, 39);">{{ $it }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -517,7 +526,7 @@
                                 Operations (TO)</a>
                         </p>
                         <p>total of student this year : <span
-                            style="color: rgb(255, 61, 39);">{{ $to }}</span></p>
+                                style="color: rgb(255, 61, 39);">{{ $to }}</span></p>
                         <hr>
                         <br>
                         <p class="text-4xl font-black text-gray-900 dark:text-black">
@@ -526,7 +535,7 @@
                                 Arts (CA)</a>
                         </p>
                         <p>total of student this year : <span
-                            style="color: rgb(255, 61, 39);">{{ $ca }}</span></p>
+                                style="color: rgb(255, 61, 39);">{{ $ca }}</span></p>
                         <hr>
                     </div>
                 </div>
@@ -534,5 +543,6 @@
         </div>
 
     </x-app-layout>
-
+@else
+    <H1>WHO ARE YOU?</H1>
 @endif
