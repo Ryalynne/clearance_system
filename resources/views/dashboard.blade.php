@@ -24,19 +24,22 @@
                                             <div class="flex items-center">
                                                 <input type="file" name="file"
                                                     class="border border-gray-300 px-4 py-2 rounded">
-                                                    <x-primary-button class="ml-3" type="submit">
-                                                        {{ __('UPLOAD') }}
-                                                    </x-primary-button>
+                                                <x-primary-button class="ml-3" type="submit">
+                                                    {{ __('UPLOAD') }}
+                                                </x-primary-button>
                                             </div>
                                         </form>
                                         <div class="input-group ml-4">
-                                            <input type="search" class="form-control rounded myInput" placeholder="Search"
-                                                aria-label="Search" aria-describedby="search-addon" />
+                                            <input type="search" class="form-control rounded myInput"
+                                                placeholder="Search" aria-label="Search"
+                                                aria-describedby="search-addon" />
                                         </div>
                                         <form method="get" class="flex space-x-4">
                                             <div class="input-group ml-4">
-                                                <input type="search" name="student_number" value="{{ request('student_number') }}" class="form-control rounded" placeholder="Request Student No."
-                                                    aria-label="Search" aria-describedby="search-addon" />
+                                                <input type="search" name="student_number"
+                                                    value="{{ request('student_number') }}" class="form-control rounded"
+                                                    placeholder="Request Student No." aria-label="Search"
+                                                    aria-describedby="search-addon" />
                                                 <x-primary-button class="ml-3" type="submit">
                                                     {{ __('FIND') }}
                                                 </x-primary-button>
@@ -103,76 +106,33 @@
 
                                                 <div class="mb-4">
                                                     <label for="class" class="block mb-2">Class:</label>
-                                                    <select name="class">
-                                                        <option value="bsit">
-                                                            BS Information Technology (BSIT)
-                                                        </option>
-                                                        <option value="bshm">
-                                                            BS Hospitality Management (BSHM)
-                                                        </option>
-                                                        <option value="bstm">
-                                                            BS Tourism Management (BSTM)
-                                                        </option>
-                                                        <option value="bsais">
-                                                            BS Accounting Information System (BSAIS)
-                                                        </option>
-                                                        <option value="bsba">
-                                                            BS Business Administration (BSBA)
-                                                        </option>
-                                                        <option value="act">
-                                                            2 yr. Associate in Computer Technology (ACT)
-                                                        </option>
-                                                        <option value="abm">
-                                                            Accountancy, Business, and Management (ABM)
-                                                        </option>
-                                                        <option value="stem">
-                                                            Science, Technology, Engineering, and Mathematics (STEM)
-                                                        </option>
-                                                        <option value="humss">
-                                                            Humanities and Social Sciences (HUMSS)
-                                                        </option>
-                                                        <option value="ga">
-                                                            General Academic (GA)
-                                                        </option>
-                                                        <option value="it">
-                                                            IT in Mobile App and Web Development (IT)
-                                                        </option>
-                                                        <option value="to">
-                                                            Tourism Operations(TO)
-                                                        </option>
-                                                        <option value="ca">
-                                                            Culinary Arts(CA)
-                                                        </option>
+                                                    <select name="class" class="rounded">
+                                                        <optgroup label="For College"> </optgroup>
+                                                        @foreach (\App\Models\CourseSection::select('Course_name', 'Course_label')->where('Designated_name', 'college')->distinct()->get() as $course)
+                                                            <option value="{{ $course->Course_name }}"
+                                                                {{ request('class') == $course->Course_name ? 'selected' : '' }}>
+                                                                {{ strtoupper($course->Course_label) }}
+                                                            </option>
+                                                        @endforeach
+                                                        <optgroup label="For Senior Highschool"> </optgroup>
+                                                        @foreach (\App\Models\CourseSection::select('Course_name', 'Course_label')->where('Designated_name', 'shs')->distinct()->get() as $course)
+                                                            <option value="{{ $course->Course_name }}"
+                                                                {{ request('class') == $course->Course_name ? 'selected' : '' }}>
+                                                                {{ strtoupper($course->Course_label) }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
 
                                                 <div class="mb-4">
                                                     <label for="section" class="block mb-2">Section:</label>
-                                                    <select name="section">
-                                                        <option value="1a">
-                                                            1-A
-                                                        </option>
-                                                        <option value="1b">
-                                                            1-B
-                                                        </option>
-                                                        <option value="2a">
-                                                            2-A
-                                                        </option>
-                                                        <option value="2b">
-                                                            2-B
-                                                        </option>
-                                                        <option value="3a">
-                                                            3-A
-                                                        </option>
-                                                        <option value="3b">
-                                                            3-B
-                                                        </option>
-                                                        <option value="4a">
-                                                            4-A
-                                                        </option>
-                                                        <option value="4b">
-                                                            4-B
-                                                        </option>
+                                                    <select name="section" class="rounded">
+                                                        @foreach (\App\Models\year_level::select('year_level')->distinct()->get() as $course)
+                                                            <option value="{{ $course->year_level }}"
+                                                                {{ request('section') == $course->year_level ? 'selected' : '' }}>
+                                                                {{ strtoupper($course->year_level) }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
 
@@ -188,15 +148,15 @@
                                                         Register
                                                     </button>
                                                 </div>
-                                                
-                                            </form>
-                                         
-                                        </div>
-                                   
-                                    </div>
 
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+                                    <br>
                                     <hr>
-                               
+
                                     <table class="min-w-full text-left text-sm font-light myTable">
                                         <thead class="border-b font-medium dark:border-neutral-500">
                                             <tr>
@@ -212,47 +172,60 @@
                                                 <th scope="col" class="px-6 py-4">Action</th>
                                             </tr>
                                         </thead>
-                                        @foreach ($student as $list)
+                                        @if ($student->count() > 0)
                                             <tbody>
-                                                <tr class="border-b dark:border-neutral-500 tr">
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                        {{ $list->id }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">
-                                                        {{ $list->student->student_number }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        {{ $list->student->first_name }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        {{ $list->student->middle_name }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        {{ $list->student->last_name }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        {{ $list->semester }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        {{ $list->school_year }}</td>
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        {{ $list->class }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">{{ \Carbon\Carbon::parse($list->cretead_at)->format('Y-m-d') }}
-                                                    </td>
-                                                    <td class="whitespace-nowrap px-6 py-4">
-                                                        <button id="modal-open2" class="edit-button"
-                                                            data-id={{ $list->id }}>
-                                                            <svg fill="none" class="w-7 h-7" stroke="currentColor"
-                                                                stroke-width="1.5" viewBox="0 0 25 25"
-                                                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
-                                                                </path>
-                                                            </svg>
-                                                        </button>
-                                                    </td>
+                                                @foreach ($student as $list)
+                                                    <tr class="border-b dark:border-neutral-500 tr">
+                                                        <td class="whitespace-nowrap px-6 py-4 font-medium">
+                                                            {{ $list->id }}</td>
+                                                        <td class="whitespace-nowrap px-6 py-4 font-medium">
+                                                            {{ $list->student->student_number }}</td>
+                                                        <td class="whitespace-nowrap px-6 py-4">
+                                                            {{ $list->student->first_name }}
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-6 py-4">
+                                                            {{ $list->student->middle_name }}
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-6 py-4">
+                                                            {{ $list->student->last_name }}</td>
+                                                        <td class="whitespace-nowrap px-6 py-4">
+                                                            {{ $list->semester }}
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-6 py-4">
+                                                            {{ $list->school_year }}</td>
+                                                        <td class="whitespace-nowrap px-6 py-4">
+                                                            {{ $list->class }}
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-6 py-4">
+                                                            {{ \Carbon\Carbon::parse($list->cretead_at)->format('Y-m-d') }}
+                                                        </td>
+                                                        <td class="whitespace-nowrap px-6 py-4">
+                                                            <button id="modal-open2" class="edit-button"
+                                                                data-id={{ $list->id }}>
+                                                                <svg fill="none" class="w-7 h-7"
+                                                                    stroke="currentColor" stroke-width="1.5"
+                                                                    viewBox="0 0 25 25"
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    aria-hidden="true">
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round"
+                                                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
+                                                                    </path>
+                                                                </svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
+                                                <tr>
+                                                    <td class="bg-gray-200 text-gray-500 font-medium text-center py-4"
+                                                        colspan="10">No student on the list</td>
                                                 </tr>
-                                            </tbody>
-                                        @endforeach
+                                        @endif
+                                        </tbody>
+
                                     </table>
+
                                     <br>
                                     {{ $student->links() }}
                                 </div>
@@ -383,7 +356,7 @@
                     <div class="mb-4">
                         <label for="student_id" class="block mb-2">ID:</label>
                         <input type="number" name="student_id"
-                            class="p-2 border border-gray-300 rounded-lg w-full modal-student-id" readonly>
+                            class="disabled p-2 border border-gray-300 rounded-lg w-full modal-student-id" readonly>
                     </div>
 
 
@@ -440,82 +413,33 @@
                     <div class="mb-4">
                         <label for="class" class="block mb-2">Class:</label>
                         <select name="class" class="modal-student-class">
-                            <option value="bsit">
-                                BS Information Technology (BSIT)
-                            </option>
-                            <option value="bshm">
-                                BS Hospitality Management (BSHM)
-                            </option>
-                            <option value="bstm">
-                                BS Tourism Management (BSTM)
-                            </option>
-                            <option value="bsais">
-                                BS Accounting Information System (BSAIS)
-                            </option>
-                            <option value="bsba">
-                                BS Business Administration (BSBA)
-                            </option>
-                            <option value="act">
-                                2 yr. Associate in Computer Technology
-                                (ACT)
-                            </option>
-                            <option value="abm">
-                                Accountancy, Business, and Management
-                                (ABM)
-                            </option>
-                            <option value="stem">
-                                Science, Technology, Engineering, and
-                                Mathematics (STEM)
-                            </option>
-                            <option value="humss">
-                                Humanities and Social Sciences (HUMSS)
-                            </option>
-                            <option value="ga">
-                                General Academic (GA)
-                            </option>
-                            <option value="it">
-                                IT in Mobile App and Web Development
-                                (IT)
-                            </option>
-                            <option value="to">
-                                Tourism Operations(TO)
-                            </option>
-                            <option value="ca">
-                                Culinary Arts(CA)
-                            </option>
-                            <option value="no class">
-                                Remove Class
-                            </option>
+                            <option value="Remove Class">Remove Class</option>
+                            <optgroup label="For College"> </optgroup>
+                            @foreach (\App\Models\CourseSection::select('Course_name', 'Course_label')->where('Designated_name', 'college')->distinct()->get() as $course)
+                                <option value="{{ $course->Course_name }}"
+                                    {{ request('class') == $course->Course_name ? 'selected' : '' }}>
+                                    {{ strtoupper($course->Course_label) }}
+                                </option>
+                            @endforeach
+                            <optgroup label="For Senior Highschool"> </optgroup>
+                            @foreach (\App\Models\CourseSection::select('Course_name', 'Course_label')->where('Designated_name', 'shs')->distinct()->get() as $course)
+                                <option value="{{ $course->Course_name }}"
+                                    {{ request('class') == $course->Course_name ? 'selected' : '' }}>
+                                    {{ strtoupper($course->Course_label) }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="mb-4">
                         <label for="section" class="block mb-2">Section:</label>
                         <select name="section" class="modal-student-section">
-                            <option value="1a">
-                                1-A
-                            </option>
-                            <option value="1b">
-                                1-B
-                            </option>
-                            <option value="2a">
-                                2-A
-                            </option>
-                            <option value="2b">
-                                2-B
-                            </option>
-                            <option value="3a">
-                                3-A
-                            </option>
-                            <option value="3b">
-                                3-B
-                            </option>
-                            <option value="4a">
-                                4-A
-                            </option>
-                            <option value="4b">
-                                4-B
-                            </option>
+                            @foreach (\App\Models\year_level::select('year_level')->distinct()->get() as $course)
+                                <option value="{{ $course->year_level }}"
+                                    {{ request('section') == $course->year_level ? 'selected' : '' }}>
+                                    {{ strtoupper($course->year_level) }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="flex justify-between">
@@ -660,126 +584,32 @@
                         <p class="text-4xl font-black text-gray-900 text-sky-400">FOR COLLEGE</p>
                         <hr>
                         <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="bsit"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">BS
-                                Information Technology (BSIT)</a>
-                        </p>
-                        <p>total of student this year : <span style="color: rgb(255, 61, 39);">{{ $bsit }}</p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="bshm"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">BS
-                                Hospitality Management (BSHM)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $bshm }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="bstm"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">BS
-                                Tourism
-                                Management (BSTM)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $bstm }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="bsais"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">BS
-                                Accounting Information System (BSAIS)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $bsais }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="bsba"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">BS
-                                Business
-                                Administration (BSBA)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $bsba }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="act"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">2 yr.
-                                Associate in Computer Technology (ACT)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $act }}</span></p>
-                        <hr>
-                        <br>
+
+                        @foreach ($collegeCourses as $course)
+                            <p class="text-4xl font-black text-gray-900 dark:text-black">
+                                <a href="viewcourse?course={{ $course->Course_name }}"
+                                    class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">{{ $course->Course_label }}</a>
+                            </p>
+                            <p>Total students this year: <span
+                                    style="color: rgb(255, 61, 39);">{{ $course->countStudents() }}</span></p>
+                            <hr>
+                            <br>
+                        @endforeach
+
                         <p class="text-4xl font-black text-gray-900 text-sky-400">FOR SENIOR HIGHSCHOOL</p>
                         <hr>
                         <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="abm"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Accountancy,
-                                Business, and Management (ABM) </a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $abm }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="stem"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Science,
-                                Technology, Engineering, and Mathematics (STEM)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $stem }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="humss"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Humanities
-                                and Social Sciences (HUMSS)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $humss }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="ga"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">General
-                                Academic (GA)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $ga }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="it"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">IT in
-                                Mobile App and Web Development (IT)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $it }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="to"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Tourism
-                                Operations (TO)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $to }}</span></p>
-                        <hr>
-                        <br>
-                        <p class="text-4xl font-black text-gray-900 dark:text-black">
-                            <a href="ca"
-                                class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">Culinary
-                                Arts (CA)</a>
-                        </p>
-                        <p>total of student this year : <span
-                                style="color: rgb(255, 61, 39);">{{ $ca }}</span></p>
-                        <hr>
+
+                        @foreach ($shsCourses as $course)
+                            <p class="text-4xl font-black text-gray-900 dark:text-black">
+                                <a href="viewcourse?course={{ $course->Course_name }}"
+                                    class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">{{ $course->Course_label }}</a>
+                            </p>
+                            <p>total of student this year: <span
+                                    style="color: rgb(255, 61, 39);">{{ $course->countStudents() }}</span></p>
+                            <hr>
+                            <br>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -789,3 +619,9 @@
 @else
     <H1>WHO ARE YOU?</H1>
 @endif
+<style>
+    .disabled {
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+    }
+</style>

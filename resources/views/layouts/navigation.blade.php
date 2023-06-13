@@ -14,7 +14,12 @@
                 @if (auth()->user()->department == 'admin')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
+                            {{ __('Account Management') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+                        <x-nav-link :href="route('system')" :active="request()->routeIs('system')">
+                            {{ __('System Management') }}
                         </x-nav-link>
                     </div>
                 @else

@@ -4,6 +4,8 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\remarkHistoryController;
+use App\Http\Controllers\systemController;
+use App\Http\Controllers\viewcourseController;
 use App\Http\Controllers\viewsectionController;
 use App\Imports\UsersImport;
 use Illuminate\Support\Facades\Route;
@@ -13,21 +15,8 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard',  [dashboardController::class, 'index'])->name('dashboard');
-    Route::get('/bsit', function () {return view('viewcourse');});
-    Route::get('/bshm', function () {return view('viewcourse');});
-    Route::get('/bstm', function () {return view('viewcourse');});
-    Route::get('/bsais', function () {return view('viewcourse');});
-    Route::get('/bsba', function () {return view('viewcourse');});
-    Route::get('/act', function () {return view('viewcourse');});
-
-    Route::get('/abm', function () {return view('viewcourse');});
-    Route::get('/stem', function () {return view('viewcourse');});
-    Route::get('/humss', function () {return view('viewcourse');});
-    Route::get('/ga', function () {return view('viewcourse');});
-    Route::get('/it', function () {return view('viewcourse');});
-    Route::get('/to', function () {return view('viewcourse');});
-    Route::get('/ca', function () {return view('viewcourse');});
-
+    Route::get('/system',  [systemController::class, 'index'])->name('system');
+    Route::get('/viewcourse', [viewcourseController::class, 'index']);
     Route::get('/viewsection', [viewsectionController::class, 'index']);
     Route::get('/', [dashboardController::class, 'index']);
     Route::get('student-clearance',[viewsectionController::class,'student_clearance']);
@@ -38,11 +27,17 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::post('/registerStudent', [dashboardController::class, 'registerStudent'])->name('register.student');
     Route::post('/registerUser', [dashboardController::class, 'registerUser']);
 
+    Route::post('/addCourses', [systemController::class, 'addcourse']);
+    Route::post('/addClass', [systemController::class, 'addclass']);
+    Route::post('/updateCourse', [systemController::class, 'updatecourse']);
+    
     Route::get('/student/{id}',[dashboardController::class, 'get_student']);
     Route::get('/enrollment/{id}',[dashboardController::class, 'get_enrollment']);
 
     Route::post('/updatestudent', [dashboardController::class, 'updateStudent']);
 
+    Route::get('/course/{id}',[systemController::class, 'get_course']);
+    Route::get('/section/{id}',[systemController::class, 'get_section']);
 });
 
 require __DIR__.'/auth.php';

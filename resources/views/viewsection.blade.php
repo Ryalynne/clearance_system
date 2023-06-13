@@ -427,7 +427,7 @@
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td class="text-center" colspan="8"><strong>No student found</strong></td>
+                                        <td class="bg-gray-200 text-gray-500 font-medium text-center py-4" colspan="8">No Student Found</td>
                                     </tr>
                                     @endif
                                 </tbody>

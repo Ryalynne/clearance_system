@@ -88,6 +88,25 @@
             $('.modal-student-last_name').val(data.enrollment.last_name);
         });
     });
+
+    $('.edit-course').on('click', function() {
+        var id = $(this).data('id');
+        $.get("/course/" + id, function(data, status) {
+            $('.modal-id').val(data.course.id);
+            $('.modal-Course_label').val(data.course.Course_label);
+            $('.modal-Course_name').val(data.course.Course_name);
+            $('.modal-Designated_name').val(data.course.Designated_name);
+            $('.modal-status').val(data.course.status);
+        });
+    });
+
+    $('.edit-section').on('click', function() {
+        var id = $(this).data('id');
+        $.get("/section/" + id, function(data, status) {
+            $('.modal-course-id').val(data.section.id);
+            $('.modal-year_level').val(data.section.year_level);
+        });
+    });
 </script>
 {{-- <style>
     .myInput:focus {

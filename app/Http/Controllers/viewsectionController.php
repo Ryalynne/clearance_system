@@ -55,4 +55,5 @@ class viewsectionController extends Controller
             $check_data->save();
         }
     }
+
 }

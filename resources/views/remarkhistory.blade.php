@@ -12,7 +12,7 @@
                     <form method="get" class="flex space-x-4">
                         <input type="number" name="year" value="{{ request('year') }}" placeholder="Year"
                             class="rounded" />
-                        <select name="class" class="rounded">
+                        {{-- <select name="class" class="rounded">
                             <option value="">Select Class</option>
                             <optgroup label="For College"> </optgroup>
                             <option value="bsit" {{ request('class') == 'bsit' ? 'selected' : '' }}>BSIT</option>
@@ -30,18 +30,31 @@
                             </option>
                             <option value="stem" {{ request('class') == 'stem' ? 'selected' : '' }}>STEM</option>
                             <option value="abm" {{ request('class') == 'abm' ? 'selected' : '' }}>ABM</option>
+                        </select> --}}
 
+                        <select name="class" class="rounded">
+                            <option value="">Select Class</option>
+                            <optgroup label="For College"> </optgroup>
+                            @foreach(\App\Models\CourseSection::select('Course_name','Course_label')->where('Designated_name', 'college')->distinct()->get() as $course)
+                                <option value="{{ $course->Course_name }}" {{ request('class') == $course->Course_name ? 'selected' : '' }}>
+                                    {{ strtoupper($course->Course_label) }}
+                                </option>
+                            @endforeach
+                            <optgroup label="For Senior Highschool"> </optgroup>
+                            @foreach(\App\Models\CourseSection::select('Course_name','Course_label')->where('Designated_name', 'shs')->distinct()->get() as $course)
+                            <option value="{{ $course->Course_name }}" {{ request('class') == $course->Course_name ? 'selected' : '' }}>
+                                {{ strtoupper($course->Course_label) }}
+                            </option>
+                        @endforeach
                         </select>
+
                         <select name="section" class="rounded">
-                            <option value="">Select Section</option>
-                            <option value="1a" {{ request('section') == '1a' ? 'selected' : '' }}>1A</option>
-                            <option value="1b" {{ request('section') == '1b' ? 'selected' : '' }}>1B</option>
-                            <option value="2a" {{ request('section') == '2a' ? 'selected' : '' }}>2A</option>
-                            <option value="2b" {{ request('section') == '2b' ? 'selected' : '' }}>2B</option>
-                            <option value="3a" {{ request('section') == '3a' ? 'selected' : '' }}>3A</option>
-                            <option value="3b" {{ request('section') == '3b' ? 'selected' : '' }}>3B</option>
-                            <option value="4a" {{ request('section') == '4a' ? 'selected' : '' }}>4A</option>
-                            <option value="4b" {{ request('section') == '4b' ? 'selected' : '' }}>4B</option>
+                            <option value="">Select Class</option>
+                            @foreach(\App\Models\year_level::select('year_level')->distinct()->get() as $course)
+                                <option value="{{ $course->year_level }}" {{ request('section') == $course->year_level ? 'selected' : '' }}>
+                                    {{ strtoupper($course->year_level) }}
+                                </option>
+                            @endforeach
                         </select>
                         <x-primary-button type="submit">
                             {{ __('FILTER') }}
@@ -96,7 +109,7 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td class="text-center" colspan="8"><strong>No student found</strong></td>
+                                    <td class="bg-gray-200 text-gray-500 font-medium text-center py-4" colspan="8">No Remove Remark Found</td>
                                 </tr>
                             @endif
                         </tbody>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\student_enrollment;
 use App\Models\student_info;
 use App\Models\User;
+use App\Models\CourseSection;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -12,32 +14,21 @@ class dashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $bsit = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%bsit%')->count();
-        $bshm = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%bshm%')->count();
-        $bstm = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%bstm%')->count();
-        $bsais = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%bsais%')->count();
-        $bsba = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%bsba%')->count();
-        $act = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%act%')->count();
-        $abm = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%abm%')->count();
-        $stem = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%stem%')->count();
-        $humss = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%humss%')->count();
-        $it = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%it%')->count();
-        $to = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%to%')->count();
-        $ca = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%ca%')->count();
-        $ga = student_enrollment::where("school_year", now()->year)->where('class', 'like', '%ga%')->count();
-
-
+       
+       
         if ($request->input('student_number')) {
             $studentinfo = student_info::where('student_number',$request->input('student_number'))->value('id');
             $student = student_enrollment::where('student_id', $studentinfo)->paginate(20);
         } else {
             $student = student_enrollment::paginate(20);
         }
+        $shsCourses = CourseSection::where('Designated_name', 'shs')->where('status','active')->get();
+        $collegeCourses = CourseSection::where('Designated_name', 'college')->where('status','active')->get();
         $department = User::get();
 
-        return view('dashboard', compact('bsit', 'bshm', 'bstm', 'bsais', 'bsba', 'act', 'student', 'department', 'abm', 'stem', 'humss', 'it', 'to', 'ca', 'ga'));
-    }
+        return view('dashboard', compact('collegeCourses','shsCourses','student','department'));
 
+    }
     public function registerStudent(Request $request)
     {
         $student = new student_info;

@@ -22,7 +22,7 @@
 
         <div class="mt-4">
             <x-input-label for="department" :value="__('Secret Code')" />
-            <x-text-input id="department" class="block mt-1 w-full" type="text" name="department" :value="old('department')"
+            <x-text-input id="department" class="block mt-1 w-full" type="password" name="department" :value="old('department')"
                 required autocomplete="username" />
             <x-input-error :messages="$errors->get('department')" class="mt-2" />
         </div>
