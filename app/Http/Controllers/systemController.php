@@ -61,20 +61,8 @@ class systemController extends Controller
 
     }
 
-    function updatepassword(Request $request)
-    {
-        $account = User::find($request->id);
-        $account->update([
-            'password' => $request->password,
-            'department' => $request->department,
-        ]);
-
-        return back();
-    }
-    public function get_account($id){
-        $account  = User::find($id);
-        return compact('account');
-    }
+   
+   
 
     public function get_course($id){
         $course  = CourseSection::find($id);

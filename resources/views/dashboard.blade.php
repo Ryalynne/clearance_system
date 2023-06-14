@@ -268,7 +268,7 @@
                                                         <option value="library">Library</option>
                                                         <option value="guidance">Guidance Counselor</option>
                                                         <option value="alumni">Alumni and Placement</option>
-                                                        <option value="discipline">Prefect of Discipline and Student
+                                                        <option value="prefect">Prefect of Discipline and Student
                                                             Affairs</option>
                                                         <option value="accounting">Accounting Office</option>
                                                         <option value="admin">Admin</option>
@@ -313,6 +313,7 @@
                                                 <th scope="col" class="px-6 py-4">Department</th>
                                                 <th scope="col" class="px-6 py-4">Email</th>
                                                 <th scope="col" class="px-6 py-4">Date Added</th>
+                                                <th scope="col" class="px-6 py-4">Action</th>
                                             </tr>
                                         </thead>
                                         @foreach ($department as $list)
@@ -326,7 +327,6 @@
                                                     <td class="whitespace-nowrap px-6 py-4">{{ $list->created_at }}
                                                     </td>
                                                     <td class="whitespace-nowrap px-6 py-4">
-                                                    <td class="whitespace-nowrap px-6 py-4">
                                                         <button id="modal-open3" class="edit-account"
                                                             data-id={{ $list->id }}>
                                                             <svg fill="none" class="w-7 h-7" stroke="currentColor"
@@ -337,7 +337,16 @@
                                                                 </path>
                                                             </svg>
                                                         </button>
-                                                    </td>
+
+                                                        <button id="modal-open4" class="edit-reset"
+                                                            data-id={{ $list->id }}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 25 25" stroke-width="1.5"
+                                                                stroke="currentColor" class="w-6 h-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                                                            </svg>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -470,20 +479,20 @@
             <div
                 class="bg-white rounded-lg p-6 w-full sm:w-2/3 lg:w-1/2 xl:w-1/3 border-4 border-blue-500 max-h-screen overflow-y-auto">
                 <!-- Modal Content -->
-                <h2 class="text-xl font-bold mb-4 text-sky-500">Register Department</h2>
+                <h2 class="text-xl font-bold mb-4 text-sky-500">Update Account Department</h2>
                 <!-- Student Form -->
-                <form method="POST" action="/resetPassword">
+                <form method="POST" action="/updateAccount">
                     @csrf
                     <div class="mb-4">
                         <label for="first-name" class="block mb-2">ID:</label>
-                        <input type="text" id="first-name" name="full_name"
-                            class="modal-id p-2 border border-gray-300 rounded-lg w-full" required>
+                        <input type="text" id="first-name" name="id"
+                            class="disabled modal-id p-2 border border-gray-300 rounded-lg w-full" required readonly>
                     </div>
 
                     <div class="mb-4">
                         <label for="first-name" class="block mb-2">Full Name:</label>
                         <input type="text" id="first-name" name="full_name"
-                            class="modal-name p-2 border border-gray-300 rounded-lg w-full" required>
+                            class="disabled modal-name p-2 border border-gray-300 rounded-lg w-full" required readonly>
                     </div>
 
                     <div class="mb-4">
@@ -494,7 +503,7 @@
                             <option value="library">Library</option>
                             <option value="guidance">Guidance Counselor</option>
                             <option value="alumni">Alumni and Placement</option>
-                            <option value="discipline">Prefect of Discipline and Student
+                            <option value="prefect">Prefect of Discipline and Student
                                 Affairs</option>
                             <option value="accounting">Accounting Office</option>
                             <option value="admin">Admin</option>
@@ -505,7 +514,8 @@
                     <div class="mb-4">
                         <label for="first-name" class="block mb-2">Email:</label>
                         <input type="email" id="first-name" name="email"
-                            class="modal-email p-2 border border-gray-300 rounded-lg w-full" required>
+                            class="disabled modal-email p-2 border border-gray-300 rounded-lg w-full" required
+                            readonly>
                     </div>
 
 
@@ -517,19 +527,75 @@
                             Close Modal
                         </button>
 
-                        <button type="submit"
-                            class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
+                        {{-- <button type="submit"
+                            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                             Reset Password
-                        </button>
+                        </button> --}}
 
                         <button type="submit"
                             class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
                             Update Deparment
                         </button>
+
                     </div>
                 </form>
             </div>
         </div>
+
+
+        <div id="modal4" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <div
+                class="bg-white rounded-lg p-6 w-full sm:w-2/3 lg:w-1/2 xl:w-1/3 border-4 border-blue-500 max-h-screen overflow-y-auto">
+                <!-- Modal Content -->
+                <h2 class="text-xl font-bold mb-4 text-sky-500">Register Department</h2>
+                <!-- Student Form -->
+                <form method="POST" action="/ressetAccount">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="first-name" class="block mb-2">ID:</label>
+                        <input type="text" id="first-name" name="id"
+                            class="disabled modal-id p-2 border border-gray-300 rounded-lg w-full" required readonly>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="first-name" class="block mb-2">Full Name:</label>
+                        <input type="text" id="first-name" name="full_name"
+                            class="disabled modal-name p-2 border border-gray-300 rounded-lg w-full" required readonly>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="first-name" class="block mb-2">Department:</label>
+                        <input type="text" id="first-name" name="full_name"
+                            class="disabled modal-department p-2 border border-gray-300 rounded-lg w-full" required readonly>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <label for="first-name" class="block mb-2">Email:</label>
+                        <input type="email" id="first-name" name="email"
+                            class="disabled modal-email p-2 border border-gray-300 rounded-lg w-full" required
+                            readonly>
+                    </div>
+
+
+
+
+                    <div class="flex justify-between">
+                        <button id="modal-close4" type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Close Modal
+                        </button>
+
+                        <button type="submit"
+                            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                            Reset Password
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
 
         <script>
             const passwordInput = document.getElementById('password');
@@ -638,6 +704,38 @@
                     openModal3();
                 });
             });
+
+
+
+            const modalCloseButton4 = document.getElementById('modal-close4');
+            const modal4 = document.getElementById('modal4');
+
+            function openModal4() {
+                modal4.classList.remove('hidden');
+            }
+
+            function closeModal4() {
+                modal4.classList.add('hidden');
+            }
+
+            modalCloseButton4.addEventListener('click', closeModal4);
+
+            var editButtons = document.querySelectorAll('.edit-reset');
+            editButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Get the data-id attribute value of the clicked button
+                    var studentId = button.getAttribute('data-id');
+
+                    // Perform your desired action for each row individually
+                    // Example: Open a modal or perform an edit operation
+                    console.log('Clicked button for student ID: ' + studentId);
+                    // Add your code here to open the modal or perform the edit operation
+
+                    // Open the modal for the respective row
+                    openModal4();
+                });
+            });
+
         </script>
     </x-app-layout>
 @elseif(auth()->user()->department == 'library' ||

@@ -320,7 +320,7 @@
 
                             <button type="submit"
                                 class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
-                                Register
+                                Update Course
                             </button>
                         </div>
                     </form>
@@ -342,14 +342,14 @@
                             <label for="last-name" class="block mb-2">ID:</label>
                             <input type="text" id="last-name" name="id"
                                 class="disabled modal-course-id p-2 border border-gray-300 rounded-lg w-full modal-student-last_name"
-                                required>
+                                required readonly>
                         </div>
 
                         <div class="mb-4">
                             <label for="last-name" class="block mb-2">Course Title:</label>
                             <input type="text" id="last-name" name="year_level"
                                 class="disabled modal-course-title p-2 border border-gray-300 rounded-lg w-full modal-student-last_name"
-                                required>
+                                required readonly>
                         </div>
 
 
@@ -357,7 +357,7 @@
                             <label for="last-name" class="block mb-2">Course Name:</label>
                             <input type="text" id="last-name" name="year_level"
                                 class="disabled modal-course_name p-2 border border-gray-300 rounded-lg w-full modal-student-last_name"
-                                required>
+                                required readonly>
                         </div>
 
                         <div class="mb-4">

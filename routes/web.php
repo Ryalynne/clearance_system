@@ -36,11 +36,13 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/enrollment/{id}',[dashboardController::class, 'get_enrollment']);
 
     Route::post('/updatestudent', [dashboardController::class, 'updateStudent']);
-    Route::post('/resetPassword', [dashboardController::class, 'updatepassword']);
+    Route::post('/updateAccount', [dashboardController::class, 'updateaccount']);
+    Route::post('/ressetAccount', [dashboardController::class, 'ressetaccount']);
 
     Route::get('/course/{id}',[systemController::class, 'get_course']);
     Route::get('/section/{id}',[systemController::class, 'get_section']);
-    Route::get('/account/{id}',[systemController::class, 'get_account']);
+    Route::get('/account/{id}',[dashboardController::class, 'get_account']);
+    Route::get('/reset/{id}',[dashboardController::class, 'get_reset']);
 });
 
 require __DIR__.'/auth.php';

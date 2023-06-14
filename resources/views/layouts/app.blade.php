@@ -126,6 +126,19 @@
         });
     });
 
+
+    
+    $('.edit-reset').on('click', function() {
+        var id = $(this).data('id');
+
+        $.get("/account/" + id, function(data, status) {
+            $('.modal-id').val(data.account.id);
+            $('.modal-name').val(data.account.name);
+            $('.modal-email').val(data.account.email);
+            $('.modal-department').val(data.account.department);
+        });
+    });
+
 </script>
 {{-- <style>
     .myInput:focus {
