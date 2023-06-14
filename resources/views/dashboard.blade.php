@@ -38,11 +38,8 @@
                                             <div class="input-group ml-4">
                                                 <input type="search" name="student_number"
                                                     value="{{ request('student_number') }}" class="form-control rounded"
-                                                    placeholder="Request Student No." aria-label="Search"
+                                                    placeholder="Find Student No." aria-label="Search"
                                                     aria-describedby="search-addon" />
-                                                <x-primary-button class="ml-3" type="submit">
-                                                    {{ __('FIND') }}
-                                                </x-primary-button>
                                             </div>
                                         </form>
                                     </div>
@@ -72,7 +69,7 @@
                                                 <div class="mb-4">
                                                     <label for="middle-name" class="block mb-2">Middle Name:</label>
                                                     <input type="text" id="middle-name" name="middle_name"
-                                                        class="p-2 border border-gray-300 rounded-lg w-full" required>
+                                                        class="p-2 border border-gray-300 rounded-lg w-full">
                                                 </div>
 
                                                 <div class="mb-4">
@@ -274,6 +271,7 @@
                                                         <option value="discipline">Prefect of Discipline and Student
                                                             Affairs</option>
                                                         <option value="accounting">Accounting Office</option>
+                                                        <option value="admin">Admin</option>
                                                     </select>
                                                 </div>
 
@@ -315,7 +313,6 @@
                                                 <th scope="col" class="px-6 py-4">Department</th>
                                                 <th scope="col" class="px-6 py-4">Email</th>
                                                 <th scope="col" class="px-6 py-4">Date Added</th>
-                                                <th scope="col" class="px-6 py-4">Action</th>
                                             </tr>
                                         </thead>
                                         @foreach ($department as $list)
@@ -329,8 +326,18 @@
                                                     <td class="whitespace-nowrap px-6 py-4">{{ $list->created_at }}
                                                     </td>
                                                     <td class="whitespace-nowrap px-6 py-4">
-
-
+                                                    <td class="whitespace-nowrap px-6 py-4">
+                                                        <button id="modal-open3" class="edit-account"
+                                                            data-id={{ $list->id }}>
+                                                            <svg fill="none" class="w-7 h-7" stroke="currentColor"
+                                                                stroke-width="1.5" viewBox="0 0 25 25"
+                                                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10">
+                                                                </path>
+                                                            </svg>
+                                                        </button>
+                                                    </td>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -377,7 +384,7 @@
                     <div class="mb-4">
                         <label for="middle-name" class="block mb-2">Middle Name:</label>
                         <input type="text" id="middle-name" name="middle_name"
-                            class="p-2 border border-gray-300 rounded-lg w-full modal-student-middle_name" required>
+                            class="p-2 border border-gray-300 rounded-lg w-full modal-student-middle_name">
                     </div>
 
                     <div class="mb-4">
@@ -458,6 +465,72 @@
 
         </div>
         </div>
+
+        <div id="modal3" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <div
+                class="bg-white rounded-lg p-6 w-full sm:w-2/3 lg:w-1/2 xl:w-1/3 border-4 border-blue-500 max-h-screen overflow-y-auto">
+                <!-- Modal Content -->
+                <h2 class="text-xl font-bold mb-4 text-sky-500">Register Department</h2>
+                <!-- Student Form -->
+                <form method="POST" action="/resetPassword">
+                    @csrf
+                    <div class="mb-4">
+                        <label for="first-name" class="block mb-2">ID:</label>
+                        <input type="text" id="first-name" name="full_name"
+                            class="modal-id p-2 border border-gray-300 rounded-lg w-full" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="first-name" class="block mb-2">Full Name:</label>
+                        <input type="text" id="first-name" name="full_name"
+                            class="modal-name p-2 border border-gray-300 rounded-lg w-full" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="department" class="block mb-2">Department:</label>
+                        <select name="department" id="department"
+                            class="modal-department p-2 border border-gray-300 rounded-lg w-full" required>
+                            <option value="dean">Dean</option>
+                            <option value="library">Library</option>
+                            <option value="guidance">Guidance Counselor</option>
+                            <option value="alumni">Alumni and Placement</option>
+                            <option value="discipline">Prefect of Discipline and Student
+                                Affairs</option>
+                            <option value="accounting">Accounting Office</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <label for="first-name" class="block mb-2">Email:</label>
+                        <input type="email" id="first-name" name="email"
+                            class="modal-email p-2 border border-gray-300 rounded-lg w-full" required>
+                    </div>
+
+
+
+
+                    <div class="flex justify-between">
+                        <button id="modal-close3" type="button"
+                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Close Modal
+                        </button>
+
+                        <button type="submit"
+                            class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
+                            Reset Password
+                        </button>
+
+                        <button type="submit"
+                            class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
+                            Update Deparment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <script>
             const passwordInput = document.getElementById('password');
             const confirmPasswordInput = document.getElementById('confirm-password');
@@ -507,32 +580,6 @@
                 modal1.classList.add('hidden');
             });
 
-            // const modalOpenButton2 = document.getElementById('modal-open2');
-            // const modalCloseButton2 = document.getElementById('modal-close2');
-            // const modal2 = document.getElementById('modal2');
-
-            // modalOpenButton2.addEventListener('click', () => {
-            //     modal2.classList.remove('hidden');
-            // });
-
-            // modalCloseButton2.addEventListener('click', () => {
-            //     modal2.classList.add('hidden');
-            // });
-
-
-            // var editButtons = document.querySelectorAll('.edit-button');
-            // editButtons.forEach(function(button) {
-            //     button.addEventListener('click', function() {
-            //         // Get the data-id attribute value of the clicked button
-            //         var studentId = button.getAttribute('data-id');
-
-            //         // Perform your desired action for each row individually
-            //         // Example: Open a modal or perform an edit operation
-            //         console.log('Clicked button for student ID: ' + studentId);
-            //         // Add your code here to open the modal or perform the edit operation
-            //     });
-            // });
-
             const modalCloseButton2 = document.getElementById('modal-close2');
             const modal2 = document.getElementById('modal2');
 
@@ -559,6 +606,36 @@
 
                     // Open the modal for the respective row
                     openModal();
+                });
+            });
+
+
+            const modalCloseButton3 = document.getElementById('modal-close3');
+            const modal3 = document.getElementById('modal3');
+
+            function openModal3() {
+                modal3.classList.remove('hidden');
+            }
+
+            function closeModal3() {
+                modal3.classList.add('hidden');
+            }
+
+            modalCloseButton3.addEventListener('click', closeModal3);
+
+            var editButtons = document.querySelectorAll('.edit-account');
+            editButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Get the data-id attribute value of the clicked button
+                    var studentId = button.getAttribute('data-id');
+
+                    // Perform your desired action for each row individually
+                    // Example: Open a modal or perform an edit operation
+                    console.log('Clicked button for student ID: ' + studentId);
+                    // Add your code here to open the modal or perform the edit operation
+
+                    // Open the modal for the respective row
+                    openModal3();
                 });
             });
         </script>

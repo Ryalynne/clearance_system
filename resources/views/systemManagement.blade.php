@@ -106,7 +106,7 @@
                                             <tr>
                                                 <th scope="col" class="px-6 py-4">ID</th>
                                                 <th scope="col" class="px-6 py-4">Course Title</th>
-                                                <th scope="col" class="px-6 py-4">Course and Section</th>
+                                                <th scope="col" class="px-6 py-4">Year Level</th>
                                                 <th scope="col" class="px-6 py-4">Status</th>
                                                 <th scope="col" class="px-6 py-4">Date Added</th>
                                                 <th scope="col" class="px-6 py-4">Action</th>
@@ -222,27 +222,27 @@
                     <form action="/addClass" method="post">
                         @csrf
                         <div class="mb-4">
-                            <label for="class" class="block mb-2">Class:</label>
+                            <label for="class" class="block mb-2">Course Name:</label>
                             <select name="course_id" class="rounded">
                                 <optgroup label="For College"> </optgroup>
                                 @foreach (\App\Models\CourseSection::select('id', 'Course_name', 'Course_label')->where('Designated_name', 'college')->distinct()->get() as $course)
                                     <option value="{{ $course->id }}"
                                         {{ request('class') == $course->Course_name ? 'selected' : '' }}>
-                                        {{ strtoupper($course->Course_label) }}
+                                        {{ strtoupper($course->Course_name) }}
                                     </option>
                                 @endforeach
                                 <optgroup label="For Senior Highschool"> </optgroup>
                                 @foreach (\App\Models\CourseSection::select('id', 'Course_name', 'Course_label')->where('Designated_name', 'shs')->distinct()->get() as $course)
                                     <option value="{{ $course->id }}"
                                         {{ request('class') == $course->Course_name ? 'selected' : '' }}>
-                                        {{ strtoupper($course->Course_label) }}
+                                        {{ strtoupper($course->Course_name) }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="mb-4">
-                            <label for="last-name" class="block mb-2">Section:</label>
+                            <label for="last-name" class="block mb-2">Year Level:</label>
                             <input type="text" id="last-name" name="year_level"
                                 class="p-2 border border-gray-300 rounded-lg w-full modal-student-last_name" required>
                         </div>
@@ -257,7 +257,7 @@
                             {{-- @csrf --}}
                             <button type="submit"
                                 class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
-                                Add Class
+                                Add Section
                             </button>
                         </div>
                     </form>
@@ -333,41 +333,35 @@
                 <div
                     class="bg-white rounded-lg p-6 w-full sm:w-2/3 lg:w-1/2 xl:w-1/3 border-4 border-blue-500 max-h-screen overflow-y-auto">
                     <!-- Modal Content -->
-                    <h2 class="text-xl font-bold mb-4 text-sky-500">Register Section</h2>
+                    <h2 class="text-xl font-bold mb-4 text-sky-500">Update Section</h2>
 
-                    <form action="/addClass" method="post">
+                    <form action="/updateClass" method="post">
                         @csrf
 
                         <div class="mb-4">
                             <label for="last-name" class="block mb-2">ID:</label>
-                            <input type="text" id="last-name" name="year_level"
+                            <input type="text" id="last-name" name="id"
                                 class="disabled modal-course-id p-2 border border-gray-300 rounded-lg w-full modal-student-last_name"
+                                required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="last-name" class="block mb-2">Course Title:</label>
+                            <input type="text" id="last-name" name="year_level"
+                                class="disabled modal-course-title p-2 border border-gray-300 rounded-lg w-full modal-student-last_name"
                                 required>
                         </div>
 
 
                         <div class="mb-4">
-                            <label for="class" class="block mb-2">Class:</label>
-                            <select name="course_id" class="rounded">
-                                <optgroup label="For College"> </optgroup>
-                                @foreach (\App\Models\CourseSection::select('id', 'Course_name', 'Course_label')->where('Designated_name', 'college')->distinct()->get() as $course)
-                                    <option value="{{ $course->id }}"
-                                        {{ request('class') == $course->Course_name ? 'selected' : '' }}>
-                                        {{ strtoupper($course->Course_label) }}
-                                    </option>
-                                @endforeach
-                                <optgroup label="For Senior Highschool"> </optgroup>
-                                @foreach (\App\Models\CourseSection::select('id', 'Course_name', 'Course_label')->where('Designated_name', 'shs')->distinct()->get() as $course)
-                                    <option value="{{ $course->id }}"
-                                        {{ request('class') == $course->Course_name ? 'selected' : '' }}>
-                                        {{ strtoupper($course->Course_label) }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <label for="last-name" class="block mb-2">Course Name:</label>
+                            <input type="text" id="last-name" name="year_level"
+                                class="disabled modal-course_name p-2 border border-gray-300 rounded-lg w-full modal-student-last_name"
+                                required>
                         </div>
 
                         <div class="mb-4">
-                            <label for="last-name" class="block mb-2">Section:</label>
+                            <label for="last-name" class="block mb-2">Year Level:</label>
                             <input type="text" id="last-name" name="year_level"
                                 class="modal-year_level p-2 border border-gray-300 rounded-lg w-full modal-student-last_name"
                                 required>
@@ -392,7 +386,7 @@
                             {{-- @csrf --}}
                             <button type="submit"
                                 class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
-                                Add Class
+                                Update Section
                             </button>
                         </div>
                     </form>

@@ -11,7 +11,7 @@ class year_level extends Model
 
 
     protected $fillable = [
-        'course_id','year_level'
+        'course_id','year_level','status'
     ];
 
     public function course(){

@@ -102,11 +102,30 @@
 
     $('.edit-section').on('click', function() {
         var id = $(this).data('id');
+
         $.get("/section/" + id, function(data, status) {
             $('.modal-course-id').val(data.section.id);
             $('.modal-year_level').val(data.section.year_level);
+
+            $.get("/course/" + data.section.course_id, function(courseData, courseStatus) {
+                $('.modal-course_name').val(courseData.course.Course_name);
+                $('.modal-course-title').val(courseData.course.Course_label);
+            });
         });
     });
+
+
+    $('.edit-account').on('click', function() {
+        var id = $(this).data('id');
+
+        $.get("/account/" + id, function(data, status) {
+            $('.modal-id').val(data.account.id);
+            $('.modal-name').val(data.account.name);
+            $('.modal-email').val(data.account.email);
+            $('.modal-department').val(data.account.department);
+        });
+    });
+
 </script>
 {{-- <style>
     .myInput:focus {
