@@ -22,6 +22,22 @@
                             {{ __('System Management') }}
                         </x-nav-link>
                     </div>
+                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+                        <x-nav-link :href="route('clearance')" :active="request()->routeIs('clearance')">
+                            {{ __('View Clearances By Course & Section') }}
+                        </x-nav-link>
+                    </div> --}}
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+                        <x-nav-link :href="route('viewallclearance', ['year' => 2023, 'year1' => 2023])" :active="request()->routeIs('viewallclearance')">
+                            {{ __('View All Clearances') }}
+                        </x-nav-link>                        
+                    </div>
+                @elseif(auth()->user()->department == 'teacher')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+                    <x-nav-link :href="route('clearance')" :active="request()->routeIs('clearance')">
+                        {{ __('View Clearances') }}
+                    </x-nav-link>
+                </div>
                 @else
                     <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">

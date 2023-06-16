@@ -68,6 +68,32 @@
         });
     });
 
+    $('.edit-remark').on('click', function() {
+        var id = $(this).data('id');
+        var semester = $(this).data('semester');
+        var student_id = ""; // Initialize student_id variable
+
+        $.get("/enrollment/" + id, function(data, status) {
+            $('.modal-student-number').val(data.enrollment.student_number);
+            $('.modal-student-fullname').val(data.enrollment.first_name + " " + data.enrollment
+                .middle_name + " " + data.enrollment.last_name);
+            student_id = data.enrollment.id; // Assign student_id value
+
+            // Only make the remark AJAX request if student_id is not empty
+            if (student_id) {
+                var urlParams = new URLSearchParams(window.location.search);
+                var year = urlParams.get('year');
+
+                $.get("/remark/" + student_id + "/" + semester + "/" + year, function(data, status) {
+                    $('.modal-student-id').val(data.remark.id);
+                    $('.modal-student-remark').val(data.remark.remarks);
+                });
+            }
+        });
+    });
+
+
+
     $('.edit-button').on('click', function() {
         var id = $(this).data('id');
         $.get("/student/" + id, function(data, status) {
@@ -127,7 +153,7 @@
     });
 
 
-    
+
     $('.edit-reset').on('click', function() {
         var id = $(this).data('id');
 
@@ -138,7 +164,6 @@
             $('.modal-department').val(data.account.department);
         });
     });
-
 </script>
 {{-- <style>
     .myInput:focus {

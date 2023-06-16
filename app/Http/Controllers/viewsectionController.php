@@ -7,6 +7,7 @@ use App\Models\student_enrollment;
 use App\Models\student_info;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class viewsectionController extends Controller
 {
@@ -15,11 +16,15 @@ class viewsectionController extends Controller
         $sem = $request->input('sem');
         $class = $request->input('Request');
         $year = $request->input('year');
+
+      
         $student = null;
         $student = student_enrollment::where('class', $class)->where('semester', $sem)->where('school_year', $year)->paginate(10);
+
         if ($student === null) {
             return false;
         }
+
         return view('viewsection', compact('student'));
     }
 
@@ -52,8 +57,22 @@ class viewsectionController extends Controller
 
         if ($check_data) {
             $check_data->status = '1';
+            $check_data->doneremarks = $request->doneremarks;
             $check_data->save();
         }
+        return back();
     }
 
+    public function get_remark($id, $semester, $year){
+
+
+        $remark = student_clearance::where('student_id', $id)
+            ->where('semester', $semester)
+            ->where('department', auth()->user()->department)
+            ->where('status', 0)
+            ->whereYear('created_at', $year)
+            ->first();
+        
+        return compact('remark');
+    }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('department');
             $table->string('remarks');
+            $table->string('doneremarks')->nullable();
             $table->timestamps();
         });
     }

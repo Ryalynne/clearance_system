@@ -38,7 +38,7 @@
                                     @if ($course->count() > 0)
                                         @foreach ($course as $item)
                                             <tbody>
-                                                <tr class="border-b border-black">
+                                                <tr class="border-b border-black tr">
                                                     <td class="whitespace-nowrap px-6 py-4 font-medium">
                                                         {{ $item->id }}</td>
                                                     <td class="whitespace-nowrap px-6 py-4 font-medium">
@@ -94,14 +94,14 @@
                                             Register Section
                                         </button>
                                         <div class="input-group ml-4">
-                                            <input type="search" class="form-control rounded myInput"
+                                            <input type="search" class="form-control rounded myInput1"
                                                 placeholder="Search" aria-label="Search"
                                                 aria-describedby="search-addon" />
                                         </div>
                                     </div>
                                     <br>
                                     <hr>
-                                    <table class="min-w-full text-left text-sm font-light myTable">
+                                    <table class="min-w-full text-left text-sm font-light myTable1">
                                         <thead class="border-b font-medium dark:border-neutral-500">
                                             <tr>
                                                 <th scope="col" class="px-6 py-4">ID</th>
@@ -115,7 +115,7 @@
                                         @if ($section->count() > 0)
                                             @foreach ($section as $item)
                                                 <tbody>
-                                                    <tr class="border-b border-black">
+                                                    <tr class="border-b border-black tr1">
                                                         <td class="whitespace-nowrap px-6 py-4 font-medium">
                                                             {{ $item->id }}</td>
                                                         <td class="whitespace-nowrap px-6 py-4 font-medium">
@@ -206,7 +206,7 @@
                             {{-- @csrf --}}
                             <button type="submit"
                                 class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
-                                Register
+                                Register Course
                             </button>
                         </div>
                     </form>
@@ -257,7 +257,7 @@
                             {{-- @csrf --}}
                             <button type="submit"
                                 class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
-                                Add Section
+                                Register Section
                             </button>
                         </div>
                     </form>
@@ -419,19 +419,6 @@
                 modalCloseButton2.addEventListener('click', () => {
                     modal2.classList.add('hidden');
                 });
-
-                // const modalOpenButton3 = document.getElementById('modal-open3');
-                // const modalCloseButton3 = document.getElementById('modal-close3');
-                // const modal3 = document.getElementById('modal3');
-
-                // modalOpenButton3.addEventListener('click', () => {
-                //     modal3.classList.remove('hidden');
-                // });
-
-                // modalCloseButton3.addEventListener('click', () => {
-                //     modal3.classList.add('hidden');
-                // });
-
 
                 const modalCloseButton3 = document.getElementById('modal-close3');
                 const modal3 = document.getElementById('modal3');

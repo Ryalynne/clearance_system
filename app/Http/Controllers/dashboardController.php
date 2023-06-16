@@ -116,7 +116,7 @@ class dashboardController extends Controller
     {
         $account = User::find($request->id);
         $account->update([
-             'password' => "sti_baliuag148",
+             'password' => "stibaliuag148",
         ]);
 
         return back();

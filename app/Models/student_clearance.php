@@ -20,4 +20,5 @@ class student_clearance extends Model
         return $this->belongsTo(student_enrollment::class, 'id');
     }
 
+
 }

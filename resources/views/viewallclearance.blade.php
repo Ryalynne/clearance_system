@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ 'REMARKS HISTORY FOR ' . strtoupper(auth()->user()->department) . ' DEPARTMENT' }}
+            {{ 'ACTIVE REMARKS FOR ALL DEPARTMENT' }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex space-x-4">
                 <form method="get" class="flex space-x-4">
-                    <input type="number" name="year" value="{{ request('year') }}" placeholder="Year" class="rounded" id="year-input"/>
+                    <input type="number" name="year" value="{{ request('year') }}" placeholder="Year" class="rounded"  id="year-input"/>
+                    <input type="number" name="year1" value="{{ request('year1') }}" placeholder="Year" id="year1-input"
+                        class="rounded" />
+
+
                     <select name="class" class="rounded" id="class-input">
                         <option value="">Select Class</option>
                         <optgroup label="For College"> </optgroup>
@@ -37,16 +41,9 @@
                             </option>
                         @endforeach
                     </select>
-
                     <x-primary-button type="submit">
                         {{ __('FILTER') }}
                     </x-primary-button>
-
-                    <select id="semesterSelect" class="rounded">
-                        <option value="">Select Semester</option>
-                        <option value="first">First Semester</option>
-                        <option value="second">Second Semester</option>
-                    </select>
 
                 </form>
 
@@ -56,15 +53,32 @@
                             aria-label="Search" aria-describedby="search-addon" />
                     </div>
                 </div>
-
-                <x-primary-button class="ml-3" id="print-modal">
-                    {{ __('PRINT') }}
-                </x-primary-button>
-
             </div>
             <br>
+            <select name="section" id="semesterSelect" class="rounded">
+                <option value="">All</option>
+                <option value="first">First Semester</option>
+                <option value="second">Second Semester</option>
+            </select>
+
+            <select name="department" id="selectDepartment" class="rounded">
+                <option value="">All</option>
+                <option value="dean">Dean</option>
+                <option value="library">Library</option>
+                <option value="guidance">Guidance Counselor</option>
+                <option value="alumni">Alumni and Placement</option>
+                <option value="prefect">Prefect of Discipline and Student Affairs</option>
+                <option value="accounting">Accounting Office</option>
+                <option value="registrar">Registrar's Office</option>
+            </select>
+
+            <x-primary-button class="ml-3" id="print-modal">
+                {{ __('PRINT') }}
+            </x-primary-button>
+
+            <br><br>
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border-collapse border border-black" id="studentTable">
+                <table class="min-w-full bg-white border-collapse border border-black myTable" id="studentTable">
                     <thead>
                         <tr class="bg-blue-500 text-white">
                             <th scope="col" class="px-4 py-2 border-r border-b">Student Number</th>
@@ -74,15 +88,15 @@
                             <th scope="col" class="px-4 py-2 border-r border-b">School Year</th>
                             <th scope="col" class="px-4 py-2 border-r border-b">Class</th>
                             <th scope="col" class="px-4 py-2 border-r border-b">Semester</th>
-                            <th scope="col" class="px-4 py-2 border-r border-b">Date Cleared</th>
+                            {{-- <th scope="col" class="px-4 py-2 border-r border-b">Date Cleared</th> --}}
                             <th scope="col" class="px-4 py-2 border-r border-b">Remarks</th>
-                            <th scope="col" class="px-4 py-2 border-b">Remarks For Cleared</th>
+                            <th scope="col" class="px-4 py-2 border-b">Department</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($remarks->count() > 0)
-                            @foreach ($remarks as $index => $item)
-                                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-gray-300' }}">
+                        @if ($remark->count() > 0)
+                            @foreach ($remark as $index => $item)
+                                <tr class="{{ $index % 2 == 0 ? 'bg-gray-100' : 'bg-gray-300' }} tr">
                                     <td class="px-4 py-2 border-b border-r">{{ $item->student_number }}</td>
                                     <td class="px-4 py-2 border-b border-r">{{ $item->first_name }}</td>
                                     <td class="px-4 py-2 border-b border-r">{{ $item->middle_name }}</td>
@@ -90,27 +104,26 @@
                                     <td class="px-4 py-2 border-b border-r">{{ $item->school_year }}</td>
                                     <td class="px-4 py-2 border-b border-r">{{ $item->class }}</td>
                                     <td class="px-4 py-2 border-b border-r">{{ $item->semester }}</td>
-                                    <td class="px-4 py-2 border-b border-r">
-                                        {{ \Carbon\Carbon::parse($item->updated_at)->format('Y-m-d') }}</td>
+                                    {{-- <td class="px-4 py-2 border-b border-r">
+                                        {{ \Carbon\Carbon::parse($item->updated_at)->format('Y-m-d') }}</td> --}}
                                     <td class="px-4 py-2 border-b border-r">{{ $item->remarks }}</td>
-                                    <td class="px-4 py-2 border-b">{{ $item->doneremarks }}</td>
+                                    <td class="px-4 py-2 border-b">{{ $item->department }}</td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td class="bg-gray-200 text-gray-500 font-medium text-center py-4" colspan="10">No
-                                    Remove Remark Found</td>
+                                <td class="bg-gray-200 text-gray-500 font-medium text-center py-4" colspan="10">
+                                    No Remark is available</td>
                             </tr>
                         @endif
                     </tbody>
                 </table>
             </div>
-            {{ $remarks->links() }}
+            {{ $remark->links() }}
 
         </div>
     </div>
     </div>
-
 
     <div id="print-modal1" class="fixed inset-0 flex items-center justify-center hidden">
         <div class="bg-white rounded-lg p-6 absolute top-0 left-0 right-0 bottom-0">
@@ -125,41 +138,8 @@
 
 </x-app-layout>
 <script>
-    const select = document.getElementById('semesterSelect');
-    const table = document.getElementById('studentTable');
-    const rows = table.getElementsByTagName('tr');
 
-    // Retrieve the previously selected value from localStorage, if any
-    const selectedValue = localStorage.getItem('selectedSemester');
-    select.value = selectedValue;
-
-    filterTable(selectedValue);
-
-    select.addEventListener('change', function() {
-        const selectedValue = this.value;
-
-        // Store the selected value in localStorage
-        localStorage.setItem('selectedSemester', selectedValue);
-
-        filterTable(selectedValue);
-    });
-
-    function filterTable(selectedValue) {
-        for (let i = 1; i < rows.length; i++) {
-            const row = rows[i];
-            const semesterCell = row.cells[6]; // Assuming the semester cell is the 7th cell (index 6) in each row
-
-            if (selectedValue === '' || selectedValue === semesterCell.textContent) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        }
-    }
-
-
-
-    $('#exit-button').on('click', function() {
+$('#exit-button').on('click', function() {
         $('#print-modal1').addClass('hidden');
     });
 
@@ -173,15 +153,62 @@
 
 
     $('#print-modal').on('click', function() {
-        const frame = $('#table-frame');
+    const frame = $('#table-frame');
 
-        const year = $('#year-input').val();    
-        const class1 = $('#class-input').val() || "all"; // Set default value to empty string if null or empty
-        const section = $('#section-input').val() || "all";
-        const sem = $('#semesterSelect').val() || "all";
+    const year = $('#year-input').val();
+    const year1 = $('#year1-input').val();
+    const class1 = $('#class-input').val() || "all"; // Set default value to empty string if null or empty
+    const section = $('#section-input').val() || "all"; // Set default value to empty string if null or empty
+    const sem = $('#semesterSelect').val()|| "all";
+    const department = $('#selectDepartment').val() || "all";
 
-        const link = '/remark-pdf/' + year + "/" + class1 + "/" + section + "/" + sem;
-        frame.attr('src', link);
-    });
+    const link = '/admin-pdf/' + year + "/" + year1 + "/" + class1  + "/" + section + "/" + sem  + "/" + department;
+    frame.attr('src', link);
+});
+
+const selectSemester = document.getElementById('semesterSelect');
+const selectDepartment = document.getElementById('selectDepartment');
+const table = document.getElementById('studentTable');
+const rows = table.getElementsByTagName('tr');
+
+// Retrieve the previously selected values from localStorage, if any
+let selectedSemester = localStorage.getItem('selectedSemester');
+let selectedDepartment = localStorage.getItem('selectedDepartment');
+selectSemester.value = selectedSemester;
+selectDepartment.value = selectedDepartment;
+
+filterTable();
+
+selectSemester.addEventListener('change', function() {
+    selectedSemester = this.value;
+    localStorage.setItem('selectedSemester', selectedSemester);
+    filterTable();
+});
+
+selectDepartment.addEventListener('change', function() {
+    selectedDepartment = this.value;
+    localStorage.setItem('selectedDepartment', selectedDepartment);
+    filterTable();
+});
+
+function filterTable() {
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const semesterCell = row.cells[6]; // Assuming the semester cell is the 7th cell (index 6) in each row
+        const departmentCell = row.cells[8]; // Assuming the department cell is the 9th cell (index 8) in each row
+
+        const semesterMatch = selectedSemester === '' || selectedSemester === semesterCell.textContent;
+        const departmentMatch = selectedDepartment === '' || selectedDepartment === departmentCell.textContent;
+
+        if (semesterMatch && departmentMatch) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+
+
 
 </script>

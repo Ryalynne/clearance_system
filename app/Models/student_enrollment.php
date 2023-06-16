@@ -18,6 +18,7 @@ class student_enrollment extends Model
         return $this->belongsTo(student_info::class, 'student_id');
     }
 
+
     public function test($semester, $student_id)
     {
         return student_clearance::where('department', auth()->user()->department)
@@ -27,76 +28,74 @@ class student_enrollment extends Model
             ->value('id');
     }
 
-    public function remarktest($semester, $student_id){
+    public function remarktest($semester, $student_id, $year){
         return student_clearance::where('department', auth()->user()->department)
             ->where('student_id', $student_id)
             ->where('semester', $semester)
-            ->where('status', 0)
+            ->where('status', 0)->whereYear('created_at', $year)
             ->value('remarks');
     }
 
-    public function remark($semester, $student_id)
+    public function remark($semester, $student_id, $year)
     {
         return student_clearance::where('department', 'library')
             ->where('student_id', $student_id)
             ->where('semester', $semester)
-            ->where('status', 0)
+            ->where('status', 0)->whereYear('created_at', $year)
             ->value('remarks');
     }
 
-    public function remark1($semester, $student_id)
+    public function remark1($semester, $student_id, $year)
     {
         return student_clearance::where('department', 'guidance')
             ->where('student_id', $student_id)
             ->where('semester', $semester)
-            ->where('status', 0)
+            ->where('status', 0)->whereYear('created_at', $year)
             ->value('remarks');
     }
 
-    public function remark2($semester, $student_id)
+    public function remark2($semester, $student_id, $year)
     {
         return student_clearance::where('department', 'alumni')
             ->where('student_id', $student_id)
             ->where('semester', $semester)
-            ->where('status', 0)
+            ->where('status', 0)->whereYear('created_at', $year)
             ->value('remarks');
     }
 
-    public function remark3($semester, $student_id)
+    public function remark3($semester, $student_id, $year)
     {
         return student_clearance::where('department', 'prefect')
             ->where('student_id', $student_id)
             ->where('semester', $semester)
-            ->where('status', 0)
+            ->where('status', 0)->whereYear('created_at', $year)
             ->value('remarks');
     }
 
-    public function remark4($semester, $student_id)
+    public function remark4($semester, $student_id, $year)
     {
         return student_clearance::where('department', 'accounting')
             ->where('student_id', $student_id)
             ->where('semester', $semester)
-            ->where('status', 0)
+            ->where('status', 0)->whereYear('created_at', $year)
             ->value('remarks');
     }
 
-    public function remark5($semester, $student_id)
+    public function remark5($semester, $student_id, $year)
     {
-        return student_clearance::where('department', 'registar')
+        return student_clearance::where('department', 'registrar')
             ->where('student_id', $student_id)
             ->where('semester', $semester)
-            ->where('status', 0)
+            ->where('status', 0)->whereYear('created_at', $year)
             ->value('remarks');
     }
 
-    public function remark6($semester, $student_id)
+    public function remark6($semester, $student_id, $year)
     {
         return student_clearance::where('department', 'dean')
             ->where('student_id', $student_id)
             ->where('semester', $semester)
-            ->where('status', 0)
+            ->where('status', 0)->whereYear('created_at', $year)
             ->value('remarks');
     }
-
-    
 }

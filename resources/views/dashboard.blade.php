@@ -271,6 +271,8 @@
                                                         <option value="prefect">Prefect of Discipline and Student
                                                             Affairs</option>
                                                         <option value="accounting">Accounting Office</option>
+                                                        <option value="registrar">Registrar's Office</option>
+                                                        <option value="teacher">Teacher</option>
                                                         <option value="admin">Admin</option>
                                                     </select>
                                                 </div>
@@ -309,6 +311,7 @@
                                     <table class="min-w-full text-left text-sm font-light">
                                         <thead class="border-b font-medium dark:border-neutral-500">
                                             <tr>
+                                                <th scope="col" class="px-6 py-4">ID</th>
                                                 <th scope="col" class="px-6 py-4">Full Name</th>
                                                 <th scope="col" class="px-6 py-4">Department</th>
                                                 <th scope="col" class="px-6 py-4">Email</th>
@@ -319,6 +322,7 @@
                                         @foreach ($department as $list)
                                             <tbody>
                                                 <tr class="border-b dark:border-neutral-500">
+                                                    <td class="whitespace-nowrap px-6 py-4 font-medium">{{$list->id}}</td>
                                                     <td class="whitespace-nowrap px-6 py-4 font-medium">
                                                         {{ $list->name }}</td>
                                                     <td class="whitespace-nowrap px-6 py-4">{{ $list->department }}
@@ -504,9 +508,12 @@
                             <option value="guidance">Guidance Counselor</option>
                             <option value="alumni">Alumni and Placement</option>
                             <option value="prefect">Prefect of Discipline and Student
-                                Affairs</option>
+                                Affairs</option>                          
                             <option value="accounting">Accounting Office</option>
+                            <option value="registrar">Registrar's Office</option>
+                            <option value="teacher">Teacher</option>
                             <option value="admin">Admin</option>
+                            <option value="deactive">Deactivate</option>
                         </select>
                     </div>
 
@@ -526,11 +533,6 @@
                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                             Close Modal
                         </button>
-
-                        {{-- <button type="submit"
-                            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                            Reset Password
-                        </button> --}}
 
                         <button type="submit"
                             class="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded">
@@ -566,7 +568,8 @@
                     <div class="mb-4">
                         <label for="first-name" class="block mb-2">Department:</label>
                         <input type="text" id="first-name" name="full_name"
-                            class="disabled modal-department p-2 border border-gray-300 rounded-lg w-full" required readonly>
+                            class="disabled modal-department p-2 border border-gray-300 rounded-lg w-full" required
+                            readonly>
                     </div>
 
 
@@ -735,7 +738,6 @@
                     openModal4();
                 });
             });
-
         </script>
     </x-app-layout>
 @elseif(auth()->user()->department == 'library' ||
@@ -759,38 +761,52 @@
                         <p class="text-4xl font-black text-gray-900 text-sky-400">FOR COLLEGE</p>
                         <hr>
                         <br>
+                        @if ($collegeCourses->count() > 0)
 
-                        @foreach ($collegeCourses as $course)
+                            @foreach ($collegeCourses as $course)
+                                <p class="text-4xl font-black text-gray-900 dark:text-black">
+                                    <a href="viewcourse?course={{ $course->Course_name }}"
+                                        class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">{{ $course->Course_label }}</a>
+                                </p>
+                                <p>Total students this year: <span
+                                        style="color: rgb(255, 61, 39);">{{ $course->countStudents() }}</span></p>
+                                <hr>
+                                <br>
+                            @endforeach
+                        @else
                             <p class="text-4xl font-black text-gray-900 dark:text-black">
-                                <a href="viewcourse?course={{ $course->Course_name }}"
-                                    class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">{{ $course->Course_label }}</a>
+                            <p class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">No
+                                Courses Found</p>
                             </p>
-                            <p>Total students this year: <span
-                                    style="color: rgb(255, 61, 39);">{{ $course->countStudents() }}</span></p>
-                            <hr>
-                            <br>
-                        @endforeach
-
+                        @endif
                         <p class="text-4xl font-black text-gray-900 text-sky-400">FOR SENIOR HIGHSCHOOL</p>
                         <hr>
                         <br>
-
-                        @foreach ($shsCourses as $course)
+                        @if ($shsCourses->count() > 0)
+                            @foreach ($shsCourses as $course)
+                                <p class="text-4xl font-black text-gray-900 dark:text-black">
+                                    <a href="viewcourse?course={{ $course->Course_name }}"
+                                        class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">{{ $course->Course_label }}</a>
+                                </p>
+                                <p>total of student this year: <span
+                                        style="color: rgb(255, 61, 39);">{{ $course->countStudents() }}</span></p>
+                                <hr>
+                                <br>
+                            @endforeach
+                        @else
                             <p class="text-4xl font-black text-gray-900 dark:text-black">
-                                <a href="viewcourse?course={{ $course->Course_name }}"
-                                    class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">{{ $course->Course_label }}</a>
+                            <p class="hover:text-yellow-400 hover:text-6xl transition duration-300 ease-in-out">No
+                                Courses Found</p>
                             </p>
-                            <p>total of student this year: <span
-                                    style="color: rgb(255, 61, 39);">{{ $course->countStudents() }}</span></p>
-                            <hr>
-                            <br>
-                        @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
 
     </x-app-layout>
+@elseif(auth()->user()->department == "teacher")
+<script>window.location = "{{ route('clearance') }}";</script>
 @else
     <H1>WHO ARE YOU?</H1>
 @endif
