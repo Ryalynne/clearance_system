@@ -17,7 +17,9 @@
 <div>
     <span>Course and Section : {{strtoupper($section)}} </span>   
 </div>
-<br>
+<div>
+    <span>Please ensure that all students in the list are in compliance.</span>
+    </div>
 <body>
     <table class="table table-bordered myTable">
         <thead>

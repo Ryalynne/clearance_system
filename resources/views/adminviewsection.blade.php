@@ -1,13 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ 'ACTIVE REMARKS FOR ALL DEPARTMENT'}}
+            {{ 'ACTIVE REMARKS FOR CLEARANCE TO ALL DEPARTMENT FOR ' . strtoupper(request()->input('Request'))}}
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center">
+
                     <form method="get" class="flex space-x-4">
                         <select name="sem" data-te-select-init id="sem-input">
                             <option
@@ -18,8 +19,10 @@
                                 value="second"{{ request('sem') === 'second' && request()->input('Request') ? ' selected' : '' }}>
                                 Second Semester
                             </option>
+
                         </select>
-                        <input type="hidden" name="Request" value="{{ request('Request') }} " id="section-input">
+                       
+                   
 
                         <x-primary-button class="ml-3" type="submit">
                             {{ __('FILTER') }}
@@ -36,7 +39,9 @@
                                 Cleared
                             </option>
                         </select>
+                        <input type="hidden" name="Request" value="{{ request('Request') }}" id="section-input" class="hiddenbt" style="visibility: hidden;">
 
+                        <input type="number" name="year" value="{{ request('year') }}" placeholder="Year" class="rounded hiddenid"  style="visibility: hidden;" />
                     </form>
 
                     <x-primary-button class="ml-3 hiddenbt" id="print-modal">
@@ -61,9 +66,7 @@
                                     @if ($student->count() > 0)
                                         <tr class="whitespace-nowrap px-6 py-4 font-medium">
                                             <th scope="col" class="px-6 py-4">Student Number</th>
-                                            <th scope="col" class="px-6 py-4">First Name</th>
-                                            <th scope="col" class="px-6 py-4">Middle Name</th>
-                                            <th scope="col" class="px-6 py-4">Last Name</th>
+                                            <th scope="col" class="px-6 py-4">Full Name</th>
 
                                             <th scope="col" class="px-6 py-4">Library</th>
                                             <th scope="col" class="px-6 py-4">Guidance Counselor</th>
@@ -80,9 +83,7 @@
                                         <tr class="border-b dark:border-neutral-500 tr">
                                             @if (request('remark') == '')
                                                 <td class="px-6 py-4">{{ $list->student->student_number }}</td>
-                                                <td class="px-6 py-4">{{ $list->student->first_name }}</td>
-                                                <td class="px-6 py-4">{{ $list->student->middle_name }}</td>
-                                                <td class="px-6 py-4">{{ $list->student->last_name }}</td>
+                                                <td class="px-6 py-4">{{ $list->student->first_name .' ' .$list->student->middle_name .' ' . $list->student->last_name }}</td>
                                                 <td class="px-6 py-4">
                                                     <div class="mb-[0.125rem] inline-block min-h-[1.5rem] pl-[1.5rem]">
                                                         @if (auth()->user()->department == 'library')
@@ -426,7 +427,7 @@
                                                                     value="option3" disabled />
                                                                 <label
                                                                     class="inline-block pl-[0.15rem] opacity-50 hover:pointer-events-none"
-                                                                    for="inlineCheckbox3">{{ $list->remark(request()->input('sem'), $list->student_id, request()->input('year')) }}</label>
+                                                                    for="inlineCheckbox3">{{ $list->remark6(request()->input('sem'), $list->student_id, request()->input('year')) }}</label>
                                                             @else
                                                                 <input
                                                                     class="getid relative float-left -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-neutral-300 outline-none before:pointer-events-none before:absolute before:h-[0.875rem] before:w-[0.875rem] before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] checked:border-primary checked:bg-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:transition-[border-color_0.2s] focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:after:-mt-px checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent disabled:opacity-60 dark:border-neutral-600 dark:checked:border-primary dark:checked:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca]"

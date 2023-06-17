@@ -32,7 +32,7 @@
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox"
-                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember" checked>
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
@@ -45,7 +45,7 @@
                     </a>
                 @endif --}}
 
-                <x-primary-button class="ml-3">
+                <x-primary-button class="ml-3" id="loginButton">
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
@@ -53,4 +53,34 @@
     @else
         <script>window.location = "{{ route('register') }}";</script>
     @endif
+
+    <script>
+        // Retrieve saved user data from localStorage
+        var savedEmail = localStorage.getItem('rememberedEmail');
+        var savedPassword = localStorage.getItem('rememberedPassword');
+
+        // Set the email and password values if they exist
+        if (savedEmail && savedPassword) {
+            document.getElementById('email').value = savedEmail;
+            document.getElementById('password').value = savedPassword;
+        }
+
+        // Listen for the login button click event
+        document.getElementById('loginButton').addEventListener('click', function() {
+            var emailInput = document.getElementById('email');
+            var passwordInput = document.getElementById('password');
+            var rememberCheckbox = document.getElementById('remember_me');
+
+            // Check if the remember checkbox is checked
+            if (rememberCheckbox.checked) {
+                // Save the email and password to localStorage
+                localStorage.setItem('rememberedEmail', emailInput.value);
+                localStorage.setItem('rememberedPassword', passwordInput.value);
+            } else {
+                // Remove the saved email and password from localStorage
+                localStorage.removeItem('rememberedEmail');
+                localStorage.removeItem('rememberedPassword');
+            }
+        });
+    </script>
 </x-guest-layout>

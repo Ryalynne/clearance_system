@@ -590,7 +590,7 @@
         <div
             class="bg-white rounded-lg p-6 w-full sm:w-2/3 lg:w-1/2 xl:w-1/3 border-4 border-blue-500 max-h-screen overflow-y-auto">
             <!-- Modal Content -->
-            <h2 class="text-xl font-bold mb-4 text-sky-500">Update Section</h2>
+            <h2 class="text-xl font-bold mb-4 text-sky-500">Clear Remark</h2>
 
             <form action="/student-clearance-update" method="post">
                 @csrf
@@ -713,8 +713,8 @@
             var department = inputText.data('department');
             var remark = inputText.val();
             var rowIndex = inputText.closest('tr').index();
-            var targetButton = $('table tbody tr:eq(' + rowIndex + ')').find('.getid');
-            targetButton.prop('disabled', false).prop('checked', false);
+            // var targetButton = $('table tbody tr:eq(' + rowIndex + ')').find('.getid');
+            // targetButton.prop('disabled', true).prop('checked', false);
             inputText.css('color', 'black');
 
             var url = "/student-clearance?student=" + id + '&department=' + department + '&remarks=' + remark +
@@ -824,9 +824,9 @@
     });
 </script>
 <style>
-    /* .hiddenid {
+    .hiddenid {
     display: none;
-    } */
+    }
     .overflow-x-auto {
         scrollbar-width: thin;
         scrollbar-color: rgb(51, 116, 255);
@@ -849,4 +849,11 @@
         color: rgb(255, 255, 255);
         /* Add other desired styles */
     }
+
+    
+    .disabled {
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+    }
+
 </style>

@@ -29,7 +29,7 @@
                     </select>
 
                     <select name="section" class="rounded" id="section-input">
-                        <option value="">Select Class</option>
+                        <option value="">Select Section</option>
                         @foreach (\App\Models\year_level::select('year_level')->distinct()->get() as $course)
                             <option value="{{ $course->year_level }}"
                                 {{ request('section') == $course->year_level ? 'selected' : '' }}>
